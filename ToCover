@@ -1,0 +1,39 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# To Cover\n",
+    "- VMMV, MVC"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Javascript (Node.js)",
+   "language": "javascript",
+   "name": "javascript"
+  },
+  "language_info": {
+   "file_extension": ".js",
+   "mimetype": "application/javascript",
+   "name": "javascript",
+   "version": "8.10.0"
+  },
+  "toc": {
+   "nav_menu": {},
+   "number_sections": true,
+   "sideBar": true,
+   "skip_h1_title": false,
+   "title_cell": "Table of Contents",
+   "title_sidebar": "Contents",
+   "toc_cell": false,
+   "toc_position": {},
+   "toc_section_display": true,
+   "toc_window_display": false
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
