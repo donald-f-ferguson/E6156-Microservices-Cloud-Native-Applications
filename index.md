@@ -29,14 +29,15 @@ The course will cover the following topics:
 - Cloud application architecture and modeling.
 - Application and system management.
 
-The []first lecture]() provides a more detailed overview of the course and introduction to concepts.
+The [first lecture](./Notebooks/E6156-f2018-Lecture-1.html) provides a moredetailed
+overview of the course and introduction to concepts.
 
 [Notebooks](./Notebooks) contains Juptyer Notebooks for the lectures, and 
 HTML versions of the lectures. 
 
 The HTML for the various lectures are:
-    - [Lecture 1: Introduction and Overview](./Notebooks/E6156-f2018-Lecture-1.html)
-    - [Lecture 2: Lecture 2: Microservices Overview and First Microservice](./Notebooks/E6156-f2018-Lecture-2.html)
+- [Lecture 1: Introduction and Overview](./Notebooks/E6156-f2018-Lecture-1.html)
+- [Lecture 2: Lecture 2: Microservices Overview and First Microservice](./Notebooks/E6156-f2018-Lecture-2.html)
 
 More to come
   
