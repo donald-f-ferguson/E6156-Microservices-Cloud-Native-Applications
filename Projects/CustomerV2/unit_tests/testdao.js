@@ -2,7 +2,7 @@
  * Created by donaldferguson on 8/27/18.
  */
 
-const logging = require('../../lib/logging');
+const logging = require('../lib/logging');
 const Dao = require('./dao');
 
 
@@ -74,7 +74,7 @@ const test4 = function() {
         })
         .catch(
             function(error) {
-                logging.error_message("Test 4 error = " + error);
+                logging.error_message("Test 4 error = ", error);
             });
 };
 
@@ -109,8 +109,37 @@ const test6= function() {
             });
 };
 
+const test8= function() {
+
+    q = "SELECT count(*) where customers_id like 'Do%'";
+    testDao.customQ(q).then(
+        function(rows) {
+            logging.debug_message("Test 8 results = " + rows);
+        })
+        .catch(
+            function(error) {
+                logging.error_message("Test 9 error = " + error);
+            });
+};
+
+const test7= function() {
+    let tmp = {
+        firstName: "Donald"
+    };
+    let fields = { status: "ACTIVE"}
+    testDao.update(tmp, fields).then(
+        function(rows) {
+            logging.debug_message("Test 7 results = " + rows);
+        })
+        .catch(
+            function(error) {
+                logging.error_message("Test 7 error = " + error);
+            });
+};
+
 //test2();
 //test4();
 //test5();
-test6();
-
+//test6();
+//test7()
+test8();

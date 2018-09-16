@@ -9,6 +9,7 @@ let bodyParser = require('body-parser');
 let index = require('./routes/index');
 let users = require('./routes/users');
 let customers = require('./routes/customers-full');
+let security = require('./middleware/security');
 
 let logging = require('./lib/logging');
 
@@ -24,17 +25,20 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 // !!!!!!!!!!!!!!!!
 // This will become important when we discuss middleware and also multi-tenancy.
 app.use('/', function(req, res, next) {
-    logging.debug_message("headers = ", req.headers);
+    //logging.debug_message("headers = ", req.headers);
     let dnsFields = req.headers['host'].split('.');
     //req.tenant = dnsFields[0];
     req.tenant = 'E6156';
     next();
 });
+app.use('/', security.authorize);
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/', index);
 app.use('/users', users);
@@ -46,6 +50,8 @@ app.use('/users', users);
 app.get('/customers/:id', customers.get_by_id);
 app.get('/customers', customers.get_by_query);
 app.post('/customers', customers.post);
+app.post('/register', customers.register);
+app.post('/login', customers.login);
 
 
 // catch 404 and forward to error handler

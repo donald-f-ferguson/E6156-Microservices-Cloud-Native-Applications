@@ -8,8 +8,14 @@ const saltRounds = 10;
 
 
 exports.saltAndHash = function(pw) {
-   let result = hasher.generate(pw);
-   return result;
+    try {
+        let result = hasher.generate(pw);
+        return result;
+    }
+   catch(exception) {
+        console.log("Exception = " + exception);
+   }
+
 };
 
 exports.compare = function(pw, hash) {

@@ -2,9 +2,9 @@
  * Created by donaldferguson on 8/26/18.
  */
 
-const logging = require('../../lib/logging');
+const logging = require('../lib/logging');
 const cdo =
-    require('./customersdo');
+    require('../resources/customers/customersdo');
 
 let theCdo = new cdo.CustomersDAO();
 
@@ -20,7 +20,7 @@ const testA = function() {
 };
 
 const testB = function() {
-    theCdo.retrieveByTemplate({email: 'js@cc.org'}, ['lastName', 'firstName', 'email'], {tenant: 'E6156'}).then(
+    theCdo.retrieveByTemplate({firstName: "Mickey"}, null, {tenant: 'E6156'}).then(
         function(result) {
             logging.debug_message("testB result = ", result);
         })
@@ -41,6 +41,36 @@ const testC = function(d) {
             });
 };
 
+const testD = function() {
+
+    let tmp = { firstName: "Donald"}
+    let fields= { status: "Pending"}
+
+    theCdo.update(tmp, fields, {tenant: 'E6156'}).then(
+        function(result) {
+            logging.debug_message("testD result = ", result);
+        })
+        .catch(
+            function(error) {
+                logging.error_message("testD error = " + error);
+            });
+};
+
+const testE = function() {
+
+    let tmp = { firstName: "Mickey"}
+
+    theCdo.delete(tmp, {tenant: 'E6156'}).then(
+        function(result) {
+            logging.debug_message("testE result = ", result);
+        })
+        .catch(
+            function(error) {
+                logging.error_message("testE error = " + error);
+            });
+};
+
+
 let test_create = {
     id: 'lm11',
     lastName: "Messi",
@@ -51,7 +81,9 @@ let test_create = {
 };
 
 //testA();
-//testB();
-testC(test_create);
+testB();
+//testC(test_create);
+//testD()
+//testE()
 
 

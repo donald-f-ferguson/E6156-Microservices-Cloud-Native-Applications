@@ -1,12 +1,12 @@
 
 
 let logging = require('../../lib/logging');
-let Dao = require('./dao');
+let Dao = require('../../unit_tests/dao');
 let sandh = require('../../lib/salthash');
 
 
 // Metadata that defines the collection.
-var customersCollection = {
+let customersCollection = {
     identity: 'customers',
     datastore: 'default',
     primaryKey: 'id',
@@ -71,12 +71,13 @@ let CustomersDAO = function() {
         // We could have done in generic DAO but I wanted that to be focused just on Sails, Waterline and RDB.
         //
         // Convert and ID lookup to a template look up and add tenant_id from the context.
-        let template = {[customersCollection.primaryKey]: id, "tenant_id": context.tenant};
+        let template = {[customersCollection.primaryKey]: id, "tenant_id": context.tenant,
+            status: {"!=": "DELETED"}};
 
 
         return self.theDao.retrieveByTemplate(template, fields).then(
             function (result) {
-                result = convertToDate(result[0]);                  //  Need to convert numeric dates ti Date();
+                result = convertToDate(result[0]);                  //  Need to convert numeric dates to Date();
                 //logging.debug_message("Result = ", result);
                 return result;
             }
@@ -90,6 +91,10 @@ let CustomersDAO = function() {
 
         // Add tenant_id to template.
         tmpl.tenant_id = context.tenant;
+
+        if (!tmpl.status) {
+            tmpl.status = {"!=": "DELETED"}
+        }
 
         return self.theDao.retrieveByTemplate(tmpl, fields).then(
             function(result) {
@@ -105,7 +110,6 @@ let CustomersDAO = function() {
 
         return new Promise(function (resolve, reject) {
             // Add tenant_id to template.
-
             data.tenant_id = context.tenant;
 
             // Need to do two things here.
@@ -120,28 +124,94 @@ let CustomersDAO = function() {
             data.last_login = new Date(0);
 
             data = convertToDate(data);
-            let id = data.id;
 
+            // DO NOT STORE UNENCRYPTED PWs.
             data.pw = sandh.saltAndHash(data.pw);
+
+            // NOTE: Business layer determines if the created customer's state is PENDING.
+            // "Customer" may be an admin or being created manually through some admin tasl.
+
 
             self.theDao.create(data).then(
                 function (result) {
                     if (result === undefined || result == null) {
                         result = {}
                     }
-                    result.id = id;
                     resolve(result);
+                },
+                function(error) {
+                    logging.error_message("customersdo.create: Error = ", error);
+                    reject(error);
+                })
+                .catch(function(exc) {
+                    logging.error_message("customersdo.create: Exception = " + exc);
+                    reject(exc);
                 });
         });
+    };
+
+    // TODO: Need to figure out how to handle return codes, e.g. not found.
+    // Will have to get row_count or do a findByTemplateFirst.
+    self.update = function(template, fields, context) {
+
+        return new Promise(function (resolve, reject) {
+            // Add tenant_id to template.
+
+            template.tenant_id = context.tenant;
+            template.status = {"!=": "DELETED"}
+
+            self.theDao.update(template, fields).then(
+                function (result) {
+                    if (result === undefined || result == null) {
+                        result = {}
+                    }
+                    resolve({});
+                },
+                function(error) {
+                    logging.error_message("customersdo.update: Error = ", error);
+                    reject(error);
+                })
+                .catch(function(exc) {
+                    logging.error_message("customersdo.update: Exception = " + exc);
+                    reject(exc);
+                });
+        });
+
+    };
+
+    // TODO: Need to figure out how to handle return codes, e.g. not found.
+    // Will have to get row_count or do a findByTemplateFirst.
+    self.delete = function(template, context) {
+
+        return new Promise(function (resolve, reject) {
+            // Add tenant_id to template.
+            template.tenant_id = context.tenant;
+
+            let data = { status: "DELETED"};
+
+            self.update(template, data, context).then(
+                function (result) {
+                    if (result === undefined || result == null) {
+                        result = {}
+                    }
+                    resolve({})
+                },
+                function(error) {
+                    logging.error_message("customersdo.delete: Error = ", error);
+                    reject(error);
+                })
+                .catch(function(exc) {
+                    logging.error_message("customersdo.delete: Exception = " + exc);
+                    reject(exc);
+                });
+        });
+
+    };
+
+    // Custom function. Counts number of IDs matching a prefix.
+    self.count_ids = function(prefix) {
+        reject("Not implemented.");
     }
-
-    self.update = function(template, fields) {
-
-    };
-
-    self.delete = function(template) {
-
-    };
 }
 
 

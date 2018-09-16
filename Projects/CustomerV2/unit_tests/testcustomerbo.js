@@ -2,8 +2,8 @@
  * Created by donaldferguson on 8/27/18.
  */
 
-const logging = require('../../lib/logging');
-const cbo = require('./customersbo');
+const logging = require('../lib/logging');
+const cbo = require('../resources/customers/customersbo');
 
 let context = { tenant: "E6156"};
 
