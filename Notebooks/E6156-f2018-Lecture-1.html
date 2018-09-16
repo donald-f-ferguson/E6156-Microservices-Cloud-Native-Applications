@@ -11821,7 +11821,8 @@ $( document ).ready(function(){
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1>Topics in SW Engineering: Cloud and Microservice Applications<br>Lecture 1: Introduction and Overview</h1>
+<p><h1 style="line-height:1.2;">Topics in SW Engineering: Cloud and Microservice Applications<br>Lecture 1: Introduction and Overview</h1>
+#</p>
 
 </div>
 </div>
@@ -12539,11 +12540,22 @@ More honour'd in the breach than the observance."<br>
 <div class=" highlight hl-javascript"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * Created by donaldferguson on 8/12/18.</span>
 <span class="cm"> */</span>
-<span class="kd">let</span> <span class="nx">path_base</span> <span class="o">=</span> <span class="s2">&quot;/Users/donaldferguson/Dropbox/ColumbiaCourse/Courses/Fall2018/E6156/Projects/FirstMicroservice/&quot;</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">path_base</span> <span class="o">=</span> <span class="s2">&quot;/Users/donaldferguson/Dropbox/ColumbiaCourse/Courses/Fall2018/E6156/Projects/CustomerV2/&quot;</span><span class="p">;</span>
 <span class="kd">let</span> <span class="nx">logging</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="nx">path_base</span> <span class="o">+</span> <span class="s2">&quot;lib/logging&quot;</span><span class="p">);</span>
 <span class="kd">let</span> <span class="nx">mysql</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mysql&#39;</span><span class="p">);</span>
+</pre></div>
 
-<span class="kr">class</span> <span class="nx">Dao</span> <span class="p">{</span>
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-javascript"><pre><span></span><span class="kr">class</span> <span class="nx">Dao</span> <span class="p">{</span>
 
     <span class="nx">constructor</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="nx">config</span><span class="p">;</span>
@@ -12628,22 +12640,23 @@ More honour'd in the breach than the observance."<br>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="kd">let</span>	<span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">db_connect_info</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">host</span><span class="o">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
-        <span class="nx">user</span><span class="o">:</span> <span class="s2">&quot;dbuser&quot;</span><span class="p">,</span>
-        <span class="nx">password</span><span class="o">:</span> <span class="s2">&quot;dbuser&quot;</span>
-    <span class="p">},</span>
-    <span class="nx">data_table</span><span class="o">:</span> <span class="s2">&quot;e6156.customers&quot;</span><span class="p">,</span>
-    <span class="nx">primary_key</span><span class="o">:</span> <span class="s2">&quot;customers_id&quot;</span>
-<span class="p">};</span>
+        <span class="nx">db_connect_info</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">host</span><span class="o">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+            <span class="nx">user</span><span class="o">:</span> <span class="s2">&quot;dbuser&quot;</span><span class="p">,</span>
+            <span class="nx">password</span><span class="o">:</span> <span class="s2">&quot;dbuser&quot;</span>
+        <span class="p">},</span>
+        <span class="nx">data_table</span><span class="o">:</span> <span class="s2">&quot;e6156.customers&quot;</span><span class="p">,</span>
+        <span class="nx">primary_key</span><span class="o">:</span> <span class="s2">&quot;customers_id&quot;</span>
+    <span class="p">};</span>
+
 
 <span class="kd">let</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dao</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="nx">d</span><span class="p">.</span><span class="nx">sayHello</span><span class="p">();</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">get_by_id</span><span class="p">(</span><span class="s1">&#39;df1&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span>
+<span class="nx">d</span><span class="p">.</span><span class="nx">get_by_id</span><span class="p">(</span><span class="s1">&#39;DoFe19&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span>
     <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
         <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
         <span class="nx">logging</span><span class="p">.</span><span class="nx">debug_message</span><span class="p">(</span><span class="s2">&quot;Data = &quot;</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
@@ -12676,28 +12689,36 @@ More honour'd in the breach than the observance."<br>
 }
 execute_query (enter), statement = SELECT * FROM e6156.customers where customers_id = ? 
 values =  [
-  &#34;df1&#34;
+  &#34;DoFe19&#34;
 ]
 db.execute_query: After calling con create.
 Connected to DB
 db.execute_query: After query, result = [
   {
-    &#34;customers_id&#34;: &#34;df1&#34;,
+    &#34;customers_id&#34;: &#34;DoFe19&#34;,
     &#34;customers_lastname&#34;: &#34;Ferguson&#34;,
     &#34;customers_firstname&#34;: &#34;Donald&#34;,
-    &#34;customers_email&#34;: &#34;dff9@columbia.edu&#34;,
-    &#34;customers_status&#34;: &#34;ACTIVE&#34;,
-    &#34;customers_password&#34;: &#34;lakd;lkasddjkl;sADJ&#34;
+    &#34;customers_email&#34;: &#34;dff@cs.columbia.edu&#34;,
+    &#34;customers_status&#34;: &#34;PENDING&#34;,
+    &#34;customers_password&#34;: &#34;sha1$8d8e1855$1$852756c072f53de81197064623ba8f75af808bc9&#34;,
+    &#34;customers_last_login&#34;: 0,
+    &#34;customers_created&#34;: 1536178595511,
+    &#34;customers_modified&#34;: 1536178595511,
+    &#34;tenant_id&#34;: &#34;E6156&#34;
   }
 ]
 Data =  [
   {
-    &#34;customers_id&#34;: &#34;df1&#34;,
+    &#34;customers_id&#34;: &#34;DoFe19&#34;,
     &#34;customers_lastname&#34;: &#34;Ferguson&#34;,
     &#34;customers_firstname&#34;: &#34;Donald&#34;,
-    &#34;customers_email&#34;: &#34;dff9@columbia.edu&#34;,
-    &#34;customers_status&#34;: &#34;ACTIVE&#34;,
-    &#34;customers_password&#34;: &#34;lakd;lkasddjkl;sADJ&#34;
+    &#34;customers_email&#34;: &#34;dff@cs.columbia.edu&#34;,
+    &#34;customers_status&#34;: &#34;PENDING&#34;,
+    &#34;customers_password&#34;: &#34;sha1$8d8e1855$1$852756c072f53de81197064623ba8f75af808bc9&#34;,
+    &#34;customers_last_login&#34;: 0,
+    &#34;customers_created&#34;: 1536178595511,
+    &#34;customers_modified&#34;: 1536178595511,
+    &#34;tenant_id&#34;: &#34;E6156&#34;
   }
 ]
 </pre>
@@ -12797,7 +12818,7 @@ Data =  [
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="nx">config4</span> <span class="o">=</span> <span class="p">{</span>
@@ -12839,9 +12860,13 @@ db.execute_query: After query, result = [
     &#34;customers_id&#34;: &#34;dv1&#34;,
     &#34;customers_lastname&#34;: &#34;Vader&#34;,
     &#34;customers_firstname&#34;: &#34;Darth&#34;,
-    &#34;customers_email&#34;: &#34;dv@deathstar.empire.gov&#34;,
+    &#34;customers_email&#34;: &#34;dv@ds.rog&#34;,
     &#34;customers_status&#34;: &#34;ACTIVE&#34;,
-    &#34;customers_password&#34;: &#34;&#34;
+    &#34;customers_password&#34;: &#34;NONE&#34;,
+    &#34;customers_last_login&#34;: 0,
+    &#34;customers_created&#34;: 0,
+    &#34;customers_modified&#34;: 0,
+    &#34;tenant_id&#34;: &#34;&#34;
   }
 ]
 </pre>
@@ -12850,7 +12875,7 @@ db.execute_query: After query, result = [
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[3]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -12860,9 +12885,13 @@ db.execute_query: After query, result = [
     customers_id: &#39;dv1&#39;,
     customers_lastname: &#39;Vader&#39;,
     customers_firstname: &#39;Darth&#39;,
-    customers_email: &#39;dv@deathstar.empire.gov&#39;,
+    customers_email: &#39;dv@ds.rog&#39;,
     customers_status: &#39;ACTIVE&#39;,
-    customers_password: &#39;&#39; } ]</pre>
+    customers_password: &#39;NONE&#39;,
+    customers_last_login: 0,
+    customers_created: 0,
+    customers_modified: 0,
+    tenant_id: &#39;&#39; } ]</pre>
 </div>
 
 </div>
@@ -12877,7 +12906,7 @@ db.execute_query: After query, result = [
 <div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="FYI-$-$-Database-Connection-Pool">FYI $-$ Database Connection Pool<a class="anchor-link" href="#FYI-$-$-Database-Connection-Pool">&#182;</a></h5><table>
 <thead><tr>
-<th style="text-align:center"><img src="attachment:image.png" alt="image.png"></th>
+<th style="text-align:center"><img src="./images/db_connection_pool.png"></th>
 </tr>
 </thead>
 <tbody>
@@ -12962,6 +12991,24 @@ db.execute_query: After query, result = [
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="A-Note-on-Security">A Note on Security<a class="anchor-link" href="#A-Note-on-Security">&#182;</a></h5><ul>
+<li>In real applications, you would <strong>NEVER PUT USERIDs OR PASSWORDS IN SOURCE CODE.</strong></li>
+</ul>
+<ul>
+<li>There are various techniques for configuring an environment so that applications can get necessary credentials.<ul>
+<li>These are very environment specific.</li>
+<li>This is not a security class, but we will see some examples with AWS. Other cloud and on-premise platforms have analogous mechanisms.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Asynchronous-Operations,-Callbacks-and-Promises">Asynchronous Operations, Callbacks and Promises<a class="anchor-link" href="#Asynchronous-Operations,-Callbacks-and-Promises">&#182;</a></h4><ul>
 <li>Some statements can "take a long time."</li>
 </ul>
@@ -13015,7 +13062,7 @@ db.execute_query: After query, result = [
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="nx">call_back</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
@@ -13065,11 +13112,11 @@ db.execute_query: After query, result = [
 <span class="p">});</span>
 
 
-
+<span class="nx">logging</span><span class="p">.</span><span class="nx">debug_message</span><span class="p">(</span><span class="s2">&quot;This statement is after the statements above but seems to execute &quot;</span> <span class="o">+</span>
+                      <span class="s2">&quot;before the preceding statements. Even the loop complete before the statements above.\n\n&quot;</span><span class="p">);</span>
 <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">logging</span><span class="p">.</span><span class="nx">debug_message</span><span class="p">(</span><span class="s2">&quot;i = &quot;</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span>
 <span class="p">}</span>
-<span class="nx">logging</span><span class="p">.</span><span class="nx">debug_message</span><span class="p">(</span><span class="s2">&quot;This is the last statement but seems to execute first. Past code.\n\n&quot;</span><span class="p">);</span>
 </pre></div>
 
 </div>
@@ -13085,51 +13132,23 @@ db.execute_query: After query, result = [
 <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>i =  0
-i =  1
-i =  2
-i =  3
-i =  4
-i =  5
-i =  6
-i =  7
-i =  8
-i =  9
-This is the last statement but seems to execute first. Past code.
+<div class="output_subarea output_text output_error">
+<pre>
+evalmachine.&lt;anonymous&gt;:12
+con_slow = mysql.createConnection(
+^
 
-
-Connected!!!
-Fri Aug 24 2018 14:09:02 GMT-0400 (EDT)Fast: After query, result =  [
-  {
-    &#34;customers_id&#34;: &#34;df1&#34;,
-    &#34;customers_lastname&#34;: &#34;Ferguson&#34;,
-    &#34;customers_firstname&#34;: &#34;Donald&#34;,
-    &#34;customers_email&#34;: &#34;dff9@columbia.edu&#34;,
-    &#34;customers_status&#34;: &#34;ACTIVE&#34;,
-    &#34;customers_password&#34;: &#34;lakd;lkasddjkl;sADJ&#34;
-  },
-  {
-    &#34;customers_id&#34;: &#34;dt1&#34;,
-    &#34;customers_lastname&#34;: &#34;Trump&#34;,
-    &#34;customers_firstname&#34;: &#34;Donald&#34;,
-    &#34;customers_email&#34;: &#34;realdonald@fed.gov&#34;,
-    &#34;customers_status&#34;: &#34;ACTIVE&#34;,
-    &#34;customers_password&#34;: &#34;A;LSDILasdj[&#39;asd;jas&#34;
-  }
-]
-Slow: Connected!!!
-Fri Aug 24 2018 14:09:02 GMT-0400 (EDT)Slow: After query, result =  [
-  {
-    &#34;customers_id&#34;: &#34;dv1&#34;,
-    &#34;customers_lastname&#34;: &#34;Vader&#34;,
-    &#34;customers_firstname&#34;: &#34;Darth&#34;,
-    &#34;customers_email&#34;: &#34;dv@deathstar.empire.gov&#34;,
-    &#34;customers_status&#34;: &#34;ACTIVE&#34;,
-    &#34;customers_password&#34;: &#34;&#34;
-  }
-]
-</pre>
+ReferenceError: mysql is not defined
+    at evalmachine.&lt;anonymous&gt;:12:1
+    at ContextifyScript.Script.runInThisContext (vm.js:50:33)
+    at Object.runInThisContext (vm.js:139:38)
+    at run ([eval]:1002:15)
+    at onRunRequest ([eval]:829:18)
+    at onMessage ([eval]:789:13)
+    at emitTwo (events.js:126:13)
+    at process.emit (events.js:214:7)
+    at emit (internal/child_process.js:772:12)
+    at _combinedTickCallback (internal/process/next_tick.js:141:11)</pre>
 </div>
 </div>
 
@@ -13210,7 +13229,7 @@ Fri Aug 24 2018 14:09:02 GMT-0400 (EDT)Slow: After query, result =  [
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">//let path_base = &quot;/Users/donaldferguson/Dropbox/ColumbiaCourse/Courses/Fall2018/E6156/Projects/FirstMicroservice/&quot;;</span>
@@ -13249,19 +13268,16 @@ Fri Aug 24 2018 14:09:02 GMT-0400 (EDT)Slow: After query, result =  [
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Done.
 [ RowDataPacket {
-    customers_id: &#39;df1&#39;,
+    customers_id: &#39;DoFe19&#39;,
     customers_lastname: &#39;Ferguson&#39;,
     customers_firstname: &#39;Donald&#39;,
-    customers_email: &#39;dff9@columbia.edu&#39;,
-    customers_status: &#39;ACTIVE&#39;,
-    customers_password: &#39;lakd;lkasddjkl;sADJ&#39; },
-  RowDataPacket {
-    customers_id: &#39;dt1&#39;,
-    customers_lastname: &#39;Trump&#39;,
-    customers_firstname: &#39;Donald&#39;,
-    customers_email: &#39;realdonald@fed.gov&#39;,
-    customers_status: &#39;ACTIVE&#39;,
-    customers_password: &#39;A;LSDILasdj[\&#39;asd;jas&#39; } ]
+    customers_email: &#39;dff@cs.columbia.edu&#39;,
+    customers_status: &#39;PENDING&#39;,
+    customers_password: &#39;sha1$8d8e1855$1$852756c072f53de81197064623ba8f75af808bc9&#39;,
+    customers_last_login: 0,
+    customers_created: 1536178595511,
+    customers_modified: 1536178595511,
+    tenant_id: &#39;E6156&#39; } ]
 </pre>
 </div>
 </div>
@@ -13272,7 +13288,7 @@ Fri Aug 24 2018 14:09:02 GMT-0400 (EDT)Slow: After query, result =  [
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-javascript"><pre><span></span><span class="c1">//let path_base = &quot;/Users/donaldferguson/Dropbox/ColumbiaCourse/Courses/Fall2018/E6156/Projects/FirstMicroservice/&quot;;</span>
@@ -13344,30 +13360,42 @@ Fri Aug 24 2018 14:09:02 GMT-0400 (EDT)Slow: After query, result =  [
 <pre>Both connections completed!
 Database[0] returned  [
   {
+    &#34;customers_id&#34;: &#34;DoFe19&#34;,
+    &#34;customers_lastname&#34;: &#34;Ferguson&#34;,
+    &#34;customers_firstname&#34;: &#34;Donald&#34;,
+    &#34;customers_email&#34;: &#34;dff@cs.columbia.edu&#34;,
+    &#34;customers_status&#34;: &#34;PENDING&#34;,
+    &#34;customers_password&#34;: &#34;sha1$8d8e1855$1$852756c072f53de81197064623ba8f75af808bc9&#34;,
+    &#34;customers_last_login&#34;: 0,
+    &#34;customers_created&#34;: 1536178595511,
+    &#34;customers_modified&#34;: 1536178595511,
+    &#34;tenant_id&#34;: &#34;E6156&#34;
+  }
+]
+Database[1] returned  [
+  {
     &#34;customers_id&#34;: &#34;df1&#34;,
     &#34;customers_lastname&#34;: &#34;Ferguson&#34;,
     &#34;customers_firstname&#34;: &#34;Donald&#34;,
     &#34;customers_email&#34;: &#34;dff9@columbia.edu&#34;,
     &#34;customers_status&#34;: &#34;ACTIVE&#34;,
-    &#34;customers_password&#34;: &#34;lakd;lkasddjkl;sADJ&#34;
+    &#34;customers_password&#34;: &#34;None&#34;,
+    &#34;customers_last_login&#34;: 0,
+    &#34;customers_created&#34;: 0,
+    &#34;customers_modified&#34;: 0,
+    &#34;tenant_id&#34;: &#34;E6156&#34;
   },
-  {
-    &#34;customers_id&#34;: &#34;dt1&#34;,
-    &#34;customers_lastname&#34;: &#34;Trump&#34;,
-    &#34;customers_firstname&#34;: &#34;Donald&#34;,
-    &#34;customers_email&#34;: &#34;realdonald@fed.gov&#34;,
-    &#34;customers_status&#34;: &#34;ACTIVE&#34;,
-    &#34;customers_password&#34;: &#34;A;LSDILasdj[&#39;asd;jas&#34;
-  }
-]
-Database[1] returned  [
   {
     &#34;customers_id&#34;: &#34;dv1&#34;,
     &#34;customers_lastname&#34;: &#34;Vader&#34;,
     &#34;customers_firstname&#34;: &#34;Darth&#34;,
-    &#34;customers_email&#34;: &#34;dv@deathstar.empire.gov&#34;,
+    &#34;customers_email&#34;: &#34;dv@ds.rog&#34;,
     &#34;customers_status&#34;: &#34;ACTIVE&#34;,
-    &#34;customers_password&#34;: &#34;&#34;
+    &#34;customers_password&#34;: &#34;NONE&#34;,
+    &#34;customers_last_login&#34;: 0,
+    &#34;customers_created&#34;: 0,
+    &#34;customers_modified&#34;: 0,
+    &#34;tenant_id&#34;: &#34;&#34;
   }
 ]
 </pre>
