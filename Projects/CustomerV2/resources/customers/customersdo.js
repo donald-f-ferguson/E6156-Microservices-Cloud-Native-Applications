@@ -1,7 +1,7 @@
 
 
 let logging = require('../../lib/logging');
-let Dao = require('../../unit_tests/dao');
+let Dao = require('../dao');
 let sandh = require('../../lib/salthash');
 
 
