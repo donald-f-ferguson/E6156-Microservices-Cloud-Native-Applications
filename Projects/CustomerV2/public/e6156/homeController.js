@@ -63,7 +63,10 @@ app.controller("myCtrl", function($scope, $http, $location, $window) {
 
     let getCustomerInfo=function(data) {
         let url = getApiURL() + data.links[0].href;
-        $http.get(url).then(
+        let claim = $window.sessionStorage.getItem("credentials");
+        let config = {}
+        config.headers = { "authorization": claim }
+        $http.get(url, config).then(
             function(result) {
                 console.log("Result = " + JSON.stringify(result));
                 $scope.customerInfo = result.data;
@@ -102,13 +105,13 @@ app.controller("myCtrl", function($scope, $http, $location, $window) {
             function(result) {
                 console.log("Result = " + JSON.stringify(result));
                 let authorization = result.headers('authorization');
-                $window.sessionStorage.setItem("credentials", JSON.stringify(authorization));
+                $window.sessionStorage.setItem("credentials", authorization);
                 $scope.loginRegisterResult = true;
                 $scope.loginRegisterMessage = "Success. Registered/Logged on. Click close";
                 getCustomerInfo(result.data)
             },
             function(error) {
-                console.log("Result = " + JSON.stringify(result));
+                console.log("Result = " + JSON.stringify(error));
                 $scope.loginRegisterMessage = "Failed. Close and try again."
                 $scope.loginRegisterResult = true;
             }

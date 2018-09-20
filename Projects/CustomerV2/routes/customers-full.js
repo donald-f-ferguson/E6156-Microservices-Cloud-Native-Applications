@@ -1,7 +1,7 @@
 let express = require('express');
 
 let logging = require('../lib/logging');
-let return_codes = require('../unit_tests/return_codes');
+let return_codes = require('../resources/return_codes');
 let bo = require('../resources/customers/customersbo');
 let login_registration = require('../resources/customers/login_register_bo');
 
@@ -261,8 +261,6 @@ exports.login = login;
 router.put('/:id', function(req, res, next) {
 });
 
-router.put('/', function(req, res, next) {
-});
 
 router.delete('/:id', function(req, res, next) {
 });

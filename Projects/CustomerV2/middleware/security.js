@@ -88,13 +88,15 @@ let authorize = function(req, rsp, next) {
 
     if (req.headers['authorization']) {
         claims = get_claims_from_token(req.headers['authorization']);
-        console.log("claims = " + JSON.stringify(claims));
+        if (claims) {
+            console.log("claims = " + JSON.stringify(claims));
+        }
     }
     else {
         console.log("No authorization header.");
     }
 
-    if (claims.claims.roles == 'admin') {
+    if (claims && claims.claims && claims.claims.roles == 'admin') {
         next();
     }
     else {

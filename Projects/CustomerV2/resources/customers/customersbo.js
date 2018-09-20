@@ -9,7 +9,7 @@ const cdo = require('./customersdo');
 let customersdo = new cdo.CustomersDAO();
 
 let logging = require('../../lib/logging');
-let return_codes =  require('../../unit_tests/return_codes');                     // Come standard return codes for the app.
+let return_codes =  require('../return_codes');                     // Come standard return codes for the app.
 let moduleName = "customersbo.";                                    // Sort of used in logging messages.
 
 

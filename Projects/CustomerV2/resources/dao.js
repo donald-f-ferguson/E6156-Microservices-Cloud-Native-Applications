@@ -13,7 +13,7 @@ let dbAdaptor = require('sails-mysql');
 // Simple utility packages that I use.
 let logging = require('../lib/logging');         // Should replace with Winston or similar.
 let env = require('../env');                     // Simple config info based on an environment variable.
-let return_codes = require('../unit_tests/return_codes');      // Application standardized RCs.
+let return_codes = require('./return_codes');      // Application standardized RCs.
 
 // Ad hoc approach to getting information based on running local, beanstalk, etc.
 // eb2_environment is the name of the environment variable.

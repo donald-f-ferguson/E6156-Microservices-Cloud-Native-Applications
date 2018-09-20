@@ -3,7 +3,7 @@
  */
 
 const logging = require('../lib/logging');
-const Dao = require('./dao');
+const Dao = require('../resources/dao');
 
 
 

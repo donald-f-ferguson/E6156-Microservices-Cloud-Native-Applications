@@ -5,7 +5,7 @@ const cbo =  require('./customersbo');
 
 
 let logging = require('../../lib/logging');
-let return_codes =  require('../../unit_tests/return_codes');
+let return_codes =  require('../return_codes');
 
 
 // We will discuss the concept of middleware later in this lecture.
@@ -34,7 +34,7 @@ exports.login =  function(d, context) {
     // Temporarily indicate that this is an admin operation.
     context.adminOperation = true;
 
-    let the_context = content;
+    let the_context = context;
 
 
     return new Promise(function(resolve, reject) {
