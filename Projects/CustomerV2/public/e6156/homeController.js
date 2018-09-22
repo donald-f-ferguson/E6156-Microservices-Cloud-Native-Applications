@@ -1,6 +1,6 @@
-var app = angular.module("myApp", []);
+//var app = angular.module("CustomerApp", []);
 
-app.controller("myCtrl", function($scope, $http, $location, $window) {
+CustomerApp.controller("myCtrl", function($scope, $http, $location, $window) {
 
     $scope.lemail = null;
     $scope.password = null;
