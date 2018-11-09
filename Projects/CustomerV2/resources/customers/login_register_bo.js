@@ -6,6 +6,7 @@ const cbo =  require('./customersbo');
 
 let logging = require('../../lib/logging');
 let return_codes =  require('../return_codes');
+let notification = require('../../middleware/notification');
 
 
 // We will discuss the concept of middleware later in this lecture.
@@ -19,6 +20,11 @@ let security = require('../../middleware/security');
 // TODO: Need to extend to support Facebook and other social media.
 //
 exports.login =  function(d, context) {
+
+    // OK. This is all kind of funky and I should handle more cleanly.
+    if (d.socialId) {
+        return doSocialLogin(d, context);
+    }
 
     // Incoming data contains security information.
     // Email.
@@ -71,6 +77,7 @@ exports.login =  function(d, context) {
 
 exports.register =  function(d, context) {
 
+    logging.error_message("register: In register, d = ", JSON.stringify(d))
     d.status = "PENDING";
     return new Promise(function(resolve, reject) {
         cbo.create(d, context).then(
@@ -81,10 +88,12 @@ exports.register =  function(d, context) {
                 new_result.token = claim;
                 new_result.resource = "customers";
                 new_result.id = c.id;
+
+                notification.registrationNotification(d)
                 resolve(new_result);
             },
             function(error) {
-                logging.error_message("logonbo.login: error = " + error);
+                logging.error_message("logonbo.register: error = ",  error);
                 reject(error);
             }
         )
