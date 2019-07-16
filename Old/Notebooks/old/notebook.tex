@@ -1,0 +1,1382 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{E6156-f2018-Lecture-1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{\texorpdfstring{Topics in SW Engineering: Cloud and
+Microservice ApplicationsLecture 1: Introduction and
+Overview}{Topics in SW Engineering: Cloud and Microservice Applications Lecture 1: Introduction and Overview}}\label{topics-in-sw-engineering-cloud-and-microservice-applications-lecture-1-introduction-and-overview}
+
+    \subsection{About your instructor}\label{about-your-instructor}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Professor of Professional Practice,} Dept. of Computer Science.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    624 Shapiro/CEPSR
+  \item
+    dff9@columbia.edu
+  \end{itemize}
+\item
+  Academic experience
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Ph.D. in Computer Science, Columbia University, 1989
+  \item
+    Joined Columbia as first full time \emph{Professor of Professional
+    Practice}, 01-Jan-2018
+  \item
+    8 semesters as an adjunct professor teaching
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \emph{E6998: Topics in Computer Science}
+
+      \begin{itemize}
+      \tightlist
+      \item
+        Cloud Computing
+      \item
+        Web and Internet Application Development
+      \item
+        Web Application Servers and Applications
+      \item
+        Microservices
+      \end{itemize}
+    \item
+      \emph{W4111 - Introduction to Databases}
+    \item
+      \emph{E1006 - Introduction to Computing for Engineers and Applied
+      Scientists using Python}
+    \end{itemize}
+  \end{itemize}
+\item
+  35 years industry experience
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \href{https://en.wikipedia.org/wiki/IBM_Fellow}{IBM Fellow}, Chief
+    Architect for {[}IBM Software
+    Group{]}(https://en.wikipedia.org/wiki/IBM\_Software\_Group\_(SWG)
+  \item
+    Microsoft Technical Fellow
+  \item
+    Executive Vice President, Chief Technology Officer,
+    \href{https://www.ca.com/us.html}{CA Technologies}
+  \item
+    Vice President, CTO, Senior Fellow,
+    \href{https://en.wikipedia.org/wiki/Dell_Software}{Dell Software
+    Group}
+  \item
+    Co-Founder and CTO, \href{https://seekatv.com/}{Seeka TV}
+  \end{itemize}
+\item
+  Publications
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Approximately 60 technical publications.
+  \item
+    Authored, co-authored several standards in web applications and web
+    services.
+  \item
+    12 patents.
+  \end{itemize}
+\item
+  Personal and hobbies
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Two amazing daughters (One is Barnard student. One is a junior in
+    high school).
+  \item
+    Interested in languages. Speak Spanish reasonably well and trying to
+    learn Arabic.
+  \item
+    Black Belt in Kenpo Karate. Taken Krav Maga.
+  \item
+    Amateur astronomer.
+  \item
+    Road bicycling.
+  \item
+    Officer in the New York Guard.
+  \end{itemize}
+\end{itemize}
+
+\begin{longtable}[]{@{}c@{}}
+\toprule
+\tabularnewline
+\midrule
+\endhead
+\textbf{About Me}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \subsection{About this Course}\label{about-this-course}
+
+\subsubsection{Objectives}\label{objectives}
+
+\begin{itemize}
+\item
+  We will form small teams and build a simple, realistic
+  microservice/cloud application.
+\item
+  Course objectives:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Practical experience with modern technology for building solutions.
+  \item
+    Experience with patterns and best practices. My experience has been
+    that most students write "crappy code."
+  \item
+    Prepare you for internships and jobs.
+  \item
+    Have seriously cool stuff to put on your resume and discuss on
+    interviews.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{\texorpdfstring{Core Topics \(-\)
+Overview}{Core Topics - Overview}}\label{core-topics---overview}
+
+\paragraph{Microservice}\label{microservice}
+
+"A 'microservice' is a software development technique---a variant of the
+service-oriented architecture (SOA) architectural style that structures
+an application as a collection of loosely coupled services. In a
+microservices architecture, services are fine-grained and the protocols
+are lightweight. The benefit of decomposing an application into
+different smaller services is that it improves modularity and makes the
+application easier to understand, develop, test, and more resilient to
+architecture erosion. It parallelizes development by enabling small
+autonomous teams to develop, deploy and scale their respective services
+independently. It also allows the architecture of an individual service
+to emerge through continuous refactoring. Microservices-based
+architectures enable continuous delivery and deployment."
+(https://en.wikipedia.org/wiki/Microservices)
+
+\textbf{Note:} {I often cut and paste definitions from Wikipedia.
+Wikipedia is not normative and is one of many views on any topic. The
+pages are a good overview and launching point for more details. Plus, if
+you can use Github for code and solutions, I can cut and paste text.}
+
+Why microservices? - Will cover the technical benefits in next lecture.
+
+\begin{itemize}
+\tightlist
+\item
+  Hot, foundational technology and mastering it benefits your career.
+\end{itemize}
+
+\begin{longtable}[]{@{}c@{}}
+\toprule
+\tabularnewline
+\midrule
+\endhead
+\href{https://www.marketresearchfuture.com/reports/microservices-architecture-market-3149}{Microservices
+Architecture Market Research Report-Global Forecast 2023}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[]{@{}c@{}}
+\toprule
+\tabularnewline
+\midrule
+\endhead
+\href{https://www.nginx.com/resources/library/app-dev-survey/}{Microservice
+Adoption 2015}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \subsubsection{Cloud Application}\label{cloud-application}
+
+\textbf{Concept}
+
+    "Cloud computing is an information technology (IT) paradigm that enables
+ubiquitous access to shared pools of configurable system resources and
+higher-level services that can be rapidly provisioned with minimal
+management effort, often over the Internet. Cloud computing relies on
+sharing of resources to achieve coherence and economies of scale,
+similar to a public utility."
+(https://en.wikipedia.org/wiki/Cloud\_computing)
+
+\begin{longtable}[]{@{}c@{}}
+\toprule
+\tabularnewline
+\midrule
+\endhead
+\href{https://en.wikipedia.org/wiki/Cloud_computing}{Cloud
+Computing}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\textbf{NIST Conceptual Model}
+
+\begin{itemize}
+\item
+  National Institute of Standards and Technology (NIST) defined a
+  conceptual model for
+  \href{https://ws680.nist.gov/publication/get_pdf.cfm?pub_id=909505}{cloud
+  computing.}
+\item
+  Somewhat date and conceptual, which means the ideas matter but no one
+  directly realizes the architecture.
+\end{itemize}
+
+\begin{longtable}[]{@{}c@{}}
+\toprule
+\tabularnewline
+\midrule
+\endhead
+\textbf{NIST Cloud Concetual Model}\tabularnewline
+\bottomrule
+\end{longtable}
+
+NIST Terminology - \emph{Infrastructure-as-a-Service:} "The capability
+provided to the consumer is to provision processing, storage, networks,
+and other fundamental computing resources where the consumer is able to
+deploy and run arbitrary software, which can include operating systems
+and applications. The consumer does not manage or control the underlying
+cloud infrastructure but has control over operating systems, storage,
+and deployed applications; and possibly limited control of select
+networking components (e.g., host firewalls)." -
+\emph{Platform-as-a-Service:} "The capability provided to the consumer
+is to deploy onto the cloud infrastructure consumer-created or acquired
+applications created using programming languages, libraries, services,
+and tools supported by the provider.3 The consumer does not manage or
+control the underlying cloud infrastructure including network, servers,
+operating systems, or storage, but has control over the deployed
+applications and possibly configuration settings for the
+application-hosting environment." - \emph{Software-as-a-Service:} The
+capability provided to the consumer is to use the provider's
+applications running on a cloud infrastructure2 . The applications are
+accessible from various client devices through either a thin client
+interface, such as a web browser (e.g., web-based email), or a program
+interface. The consumer does not manage or control the underlying cloud
+infrastructure including network, servers, operating systems, storage,
+or even individual application capabilities, with the possible exception
+of limited userspecific application configuration settings.
+
+\begin{longtable}[]{@{}c@{}}
+\toprule
+\tabularnewline
+\midrule
+\endhead
+\href{https://slideplayer.com/slide/4582525/}{Cloud Computing
+Layers}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    Some additional concepts: - \emph{Mobile "backend" as a service
+(MBaaS):} In the mobile "backend" as a service (m) model, also known as
+backend as a service (BaaS), web app and mobile app developers are
+provided with a way to link their applications to cloud storage and
+cloud computing services with application programming interfaces (APIs)
+exposed to their applications and custom software development kits
+(SDKs). Services include user management, push notifications,
+integration with social networking services and more. This is a
+relatively recent model in cloud computing,{[}74{]} with most BaaS
+startups dating from 2011 or later but trends indicate that these
+services are gaining significant mainstream traction with enterprise
+consumers.
+
+\begin{itemize}
+\item
+  \emph{Serverless computing:} Serverless computing is a cloud computing
+  code execution model in which the cloud provider fully manages
+  starting and stopping virtual machines as necessary to serve requests,
+  and requests are billed by an abstract measure of the resources
+  required to satisfy the request, rather than per virtual machine, per
+  hour. Despite the name, it does not actually involve running code
+  without servers. Serverless computing is so named because the business
+  or person that owns the system does not have to purchase, rent or
+  provision servers or virtual machines for the back-end code to run on.
+\item
+  \emph{Function as a service (FaaS):} Function as a service (FaaS) is a
+  service-hosted remote procedure call that leverages serverless
+  computing to enable the deployment of individual functions in the
+  cloud that run in response to events. FaaS is included under the
+  broader term serverless computing, but the terms may also be used
+  interchangeably.
+\end{itemize}
+
+     
+
+    \subsubsection{How Does this Come
+Together?}\label{how-does-this-come-together}
+
+\begin{itemize}
+\tightlist
+\item
+  IaaS provides the "hardware" in shared, scalable, elastic model
+  consumable in chunks, usually \emph{virtual machines} or
+  \emph{containers.}
+\item
+  PaaS is prebuilt, prepackaged, application enablement and delivery
+  software for building microservices.
+\item
+  IaaS provides "right size" independent, virtual machines/containers to
+  execute the microservice and supporting SW.
+\item
+  SaaS is a complete, customizable, configurable solution to a problem,
+  with an internal implementation that is a set of cooperating
+  microservices.
+\item
+  SaaS offers a user interface and APIs. New applications built as
+  microservices on PaaS rely heavily on calling SaaS APIs and APIs into
+  other forms of *aaS.
+\end{itemize}
+
+    \subsubsection{So What are we Going to
+Do?}\label{so-what-are-we-going-to-do}
+
+\textbf{Course Work}
+
+\begin{itemize}
+\item
+  Build a simple multi-tenant cloud application:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A set of microservices.
+  \item
+    Using elements of cloud computing:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      PaaS
+    \item
+      FaaS
+    \item
+      Loggin
+    \item
+      Serverless
+    \item
+      Cloud Database(s)
+    \item
+      Security: Authentication, Authorization and Federation.
+    \item
+      Message Queues, Events and Event-Driven-Architecture
+    \item
+      Simple workflow and service orchestration.
+    \item
+      Call cloud business APIs.
+    \item
+      Other cool stuff.
+    \end{itemize}
+  \end{itemize}
+\item
+  Modeled on my startup's application, but you will define:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The application.
+  \item
+    Business scenario and value.
+  \item
+    Features and functions.
+  \end{itemize}
+\item
+  Periodically demo, present and have an architecture review.
+\item
+  Sort of like a small startup, only with a bit more formal reviews.
+\end{itemize}
+
+\textbf{Sparq/Seeka Demo and Overview}
+
+\begin{itemize}
+\item
+  Demo
+\item
+  Multi-tenancy
+\item
+  Architecture
+\end{itemize}
+
+    \begin{longtable}[]{@{}c@{}}
+\toprule
+\tabularnewline
+\midrule
+\endhead
+\textbf{Sparq/Seeka}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \begin{longtable}[]{@{}c@{}}
+\toprule
+\tabularnewline
+\midrule
+\endhead
+\textbf{Sparq/Seeka}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \textbf{Note:} - Amazon Web Services will be the realization of most
+technical concepts (e.g. serverless, pub/sub).
+
+\begin{itemize}
+\item
+  AWS is the dominant public cloud platform, but other vendors are
+  becoming significant.
+\item
+  Concepts are what is important; you can master any realization once
+  you understand the concepts.
+\item
+  Will try to factor in other cloud providers, e.g. Google.
+\end{itemize}
+
+    \begin{longtable}[]{@{}c@{}}
+\toprule
+\tabularnewline
+\midrule
+\endhead
+\href{https://www.rightscale.com/blog/cloud-industry-insights/cloud-computing-trends-2018-state-cloud-survey}{Cloud
+Provider Adoption}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \subsubsection{Course Format, Grading and
+Environment}\label{course-format-grading-and-environment}
+
+\begin{itemize}
+\tightlist
+\item
+  Lectures: Friday, 1:10pm to 3:40pm; 603 Hamilton Hall
+
+  \begin{itemize}
+  \tightlist
+  \item
+    1:10 - 3:00 will be lecture on material.
+  \item
+    3:00 - 3:40 will be optional discussion, recitation, etc.
+  \end{itemize}
+\item
+  Office Hours:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Thursday, 8:00 AM to 1:00 PM
+  \item
+    By appointment, as needed, as available. I typically post on Piazza
+    when I will have extra availability.
+  \end{itemize}
+\item
+  Course Material:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    No textbook
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Textbooks become out of date in this rapidly changing area.
+    \item
+      Material would span several books.
+    \end{itemize}
+  \item
+    Lecture notes and code samples
+    \href{https://github.com/donald-f-ferguson/E6156f18}{on GitHub}.
+    Sample code is mostly JavaScript and NodeJS.
+  \item
+    References to web documents and tutorials.
+  \end{itemize}
+\item
+  Grading:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Based on final project, including project presentation. 4-5 person
+    teams.
+  \item
+    Mandatory interim checkpoints and presentations, approximately every
+    two weeks.
+  \item
+    Meeting instructor defined project requirements is an "A."
+  \end{itemize}
+\item
+  Environment:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Required: AWS (team) free
+    \href{https://aws.amazon.com/free/?sc_channel=PS\&sc_campaign=acquisition_US\&sc_publisher=google\&sc_medium=ACQ-P\%7CPS-GO\%7CBrand\%7CSU\%7CCore\%7CCore\%7CUS\%7CEN\%7CText\&sc_content=Brand_Free_e\&sc_detail=amazon\%20free\%20tier\&sc_category=core\&sc_segment=280392800801\&sc_matchtype=e\&sc_country=US\&sc_kwcid=AL!4422!3!280392800801!e!!g!!amazon\%20free\%20tier\&s_kwcid=AL!4422!3!280392800801!e!!g!!amazon\%20free\%20tier\&ef_id=WKzT_wAAAJllO8d4:20180811135240:s}{tier
+    account}.
+  \item
+    Recommended:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      WebStorm (free student licenses
+      https://www.jetbrains.com/student/).
+    \item
+      Ananconda for Jupyter Notebooks
+      (https://www.anaconda.com/download/\#macos).
+    \item
+      JavaScript kernel plug-in for Jupyter Notebooks
+      (https://github.com/n-riesco/ijavascript).
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+    \subsection{First Microservice}\label{first-microservice}
+
+\begin{itemize}
+\item
+  \textbf{Enough talking!}
+\item
+  \textbf{We will go over microservice architecture, benefits, design
+  patterns, yada yada ... in future lectures.}
+\end{itemize}
+
+\_\_Let's build a microservice. Code rules and slides drool!
+
+\_\_ 
+
+    \subsubsection{Setup}\label{setup}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Installed
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    NodeJS (https://nodejs.org/en/download/).
+  \item
+    MySQL and MySQL Workbench
+    (https://dev.mysql.com/downloads/installer/)
+  \item
+    WebStorm Integrated Development Environment 
+  \end{enumerate}
+\item
+  Create directory/project
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Create directory where you want your code.
+  \item
+    Install and set up Express -\/- Node.JS Application Framework
+    (https://expressjs.com/en/starter/installing.html) 
+  \end{enumerate}
+\item
+  Download static web site template.
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    I chose
+    \href{https://blackrockdigital.github.io/startbootstrap-small-business/}{Bootstrap}
+    and prebuilt
+    \href{https://blackrockdigital.github.io/startbootstrap-small-business/}{SMB
+    Template.}
+  \item
+    Downloaded and copied to "static content" directory in project.
+  \end{enumerate}
+\end{enumerate}
+
+    \begin{longtable}[]{@{}c@{}}
+\toprule
+\tabularnewline
+\midrule
+\endhead
+\textbf{Simple Project Homepage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[]{@{}c@{}}
+\toprule
+\tabularnewline
+\midrule
+\endhead
+\_\_Simple Project Structure\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \subsubsection{Application Design Methodology:
+Data-Out/UX-In}\label{application-design-methodology-data-outux-in}
+
+\begin{longtable}[]{@{}c@{}}
+\toprule
+\tabularnewline
+\midrule
+\endhead
+\textbf{Data-Out/UX-In Design}\tabularnewline
+\bottomrule
+\end{longtable}
+
+We will use data out for the first step.
+
+    \subsubsection{Data}\label{data}
+
+\begin{longtable}[]{@{}c@{}}
+\toprule
+\includegraphics{attachment:image.png}\tabularnewline
+\midrule
+\endhead
+\textbf{ER Diagram \(-\) Physical Model}\tabularnewline
+\bottomrule
+\end{longtable}
+
+     \textbf{Relational Database Table Schema}
+
+\begin{verbatim}
+CREATE TABLE `customers` (
+  `customers_id` varchar(12) NOT NULL,
+  `customers_lastname` varchar(64) NOT NULL,
+  `customers_firstname` varchar(64) NOT NULL,
+  `customers_email` varchar(128) NOT NULL,
+  `customers_status` enum('ACTIVE','PENDING','DELETED') NOT NULL,
+  `customers_password` varchar(512) NOT NULL,
+  PRIMARY KEY (`customers_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+\end{verbatim}
+
+    Why a relational database? - I am lazy and can reuse code between both
+my classes.
+
+\begin{itemize}
+\item
+  Very common approach to managing data.
+\item
+  Good place to start.
+\item
+  A lot of application scenarios are \emph{microservice-ify my existing
+  (relational) data model.}
+\end{itemize}
+
+\begin{longtable}[]{@{}c@{}}
+\toprule
+\includegraphics{attachment:image.png}\tabularnewline
+\midrule
+\endhead
+\href{https://db-engines.com/en/ranking_categories}{DBMS popularity
+broken down by database model}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \subsubsection{\texorpdfstring{Best Practice \(-\) Data Access
+Encapsulation}{Best Practice - Data Access Encapsulation}}\label{best-practice---data-access-encapsulation}
+
+"In computer software, a data access object (DAO) is an object that
+provides an abstract interface to some type of database or other
+persistence mechanism. By mapping application calls to the persistence
+layer, the DAO provides some specific data operations without exposing
+details of the database. This isolation supports the single
+responsibility principle. It separates what data access the application
+needs, in terms of domain-specific objects and data types (the public
+interface of the DAO), from how these needs can be satisfied with a
+specific DBMS, database schema, etc. (the implementation of the DAO)."
+(https://en.wikipedia.org/wiki/Data\_access\_object)
+
+"The single responsibility principle is a computer programming principle
+that states that every module or class should have responsibility over a
+single part of the functionality provided by the software, and that
+responsibility should be entirely encapsulated by the class."
+(https://en.wikipedia.org/wiki/Single\_responsibility\_principle)
+
+\begin{longtable}[]{@{}c@{}}
+\toprule
+\includegraphics{attachment:image.png}\tabularnewline
+\midrule
+\endhead
+\href{http://www.informit.com/articles/article.aspx?p=1398621\&seqNum=3}{Data
+Access Object}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    "..., it is a custom More honour'd in the breach than the observance."
+\href{https://en.wikipedia.org/wiki/Hamlet}{Hamlet.}
+
+Comments: - There are many, many variations of this pattern and
+supporting frameworks.
+
+\begin{itemize}
+\item
+  Teams and organizations pick one (or write one) and then apply the
+  pattern.
+\item
+  If you sprinkle data access code in your microservice "business
+  logic," I will make changing schema and database backends part of the
+  assignment until you learn your lesson.
+\item
+  I am just going to do a simple implementation.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+cm}{/**}
+        \PY{c+cm}{ * Created by donaldferguson on 8/12/18.}
+        \PY{c+cm}{ */}
+        \PY{k+kd}{let} \PY{n+nx}{path\PYZus{}base} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}/Users/donaldferguson/Dropbox/ColumbiaCourse/Courses/Fall2018/E6156/Projects/FirstMicroservice/\PYZdq{}}\PY{p}{;}
+        \PY{k+kd}{let} \PY{n+nx}{logging} \PY{o}{=} \PY{n+nx}{require}\PY{p}{(}\PY{n+nx}{path\PYZus{}base} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}lib/logging\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        \PY{k+kd}{let} \PY{n+nx}{mysql} \PY{o}{=} \PY{n+nx}{require}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}mysql\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        
+        \PY{k+kr}{class} \PY{n+nx}{Dao} \PY{p}{\PYZob{}}
+        
+            \PY{n+nx}{constructor}\PY{p}{(}\PY{n+nx}{config}\PY{p}{)} \PY{p}{\PYZob{}}
+                \PY{k}{this}\PY{p}{.}\PY{n+nx}{config} \PY{o}{=} \PY{n+nx}{config}\PY{p}{;}
+                \PY{k}{this}\PY{p}{.}\PY{n+nx}{db\PYZus{}con} \PY{o}{=} \PY{k+kc}{null}\PY{p}{;}
+            \PY{p}{\PYZcb{}}
+        
+            \PY{n+nx}{sayHello}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+                \PY{n+nx}{console}\PY{p}{.}\PY{n+nx}{log}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}config = \PYZdq{}} \PY{o}{+} \PY{n+nx}{JSON}\PY{p}{.}\PY{n+nx}{stringify}\PY{p}{(}\PY{k}{this}\PY{p}{.}\PY{n+nx}{config}\PY{p}{,}\PY{k+kc}{null}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+            \PY{p}{\PYZcb{}}
+        
+            \PY{n+nx}{get\PYZus{}db\PYZus{}connection}\PY{p}{(}\PY{p}{)} \PY{p}{\PYZob{}}
+                \PY{k}{if} \PY{p}{(}\PY{k}{this}\PY{p}{.}\PY{n+nx}{db\PYZus{}con} \PY{o}{===} \PY{k+kc}{null}\PY{p}{)} \PY{p}{\PYZob{}}
+                    \PY{n+nx}{logging}\PY{p}{.}\PY{n+nx}{debug\PYZus{}message}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}db\PYZus{}connect\PYZus{}info = \PYZdq{}}\PY{p}{,} \PY{k}{this}\PY{p}{.}\PY{n+nx}{config}\PY{p}{.}\PY{n+nx}{db\PYZus{}connect\PYZus{}info}\PY{p}{)}
+                    \PY{k}{this}\PY{p}{.}\PY{n+nx}{db\PYZus{}con} \PY{o}{=} \PY{n+nx}{mysql}\PY{p}{.}\PY{n+nx}{createConnection}\PY{p}{(}\PY{k}{this}\PY{p}{.}\PY{n+nx}{config}\PY{p}{.}\PY{n+nx}{db\PYZus{}connect\PYZus{}info}\PY{p}{)}\PY{p}{;}
+                    \PY{n+nx}{logging}\PY{p}{.}\PY{n+nx}{debug\PYZus{}message}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}Created DB connection\PYZdq{}}\PY{p}{)}\PY{p}{;}
+                \PY{p}{\PYZcb{}}
+                \PY{k}{return} \PY{k}{this}\PY{p}{.}\PY{n+nx}{db\PYZus{}con}\PY{p}{;}
+            \PY{p}{\PYZcb{}}
+        
+        
+            \PY{n+nx}{execute\PYZus{}query}\PY{p}{(}\PY{n+nx}{statement}\PY{p}{,} \PY{n+nx}{values}\PY{p}{,} \PY{n+nx}{context}\PY{p}{)} \PY{p}{\PYZob{}}
+        
+                \PY{n+nx}{config} \PY{o}{=} \PY{k}{this}\PY{p}{.}\PY{n+nx}{config}\PY{p}{;}
+        
+                \PY{k}{return}	\PY{k}{new} \PY{n+nb}{Promise}\PY{p}{(}\PY{k+kd}{function}\PY{p}{(}\PY{n+nx}{resolve}\PY{p}{,} \PY{n+nx}{reject}\PY{p}{)} \PY{p}{\PYZob{}}
+                    \PY{n+nx}{logging}\PY{p}{.}\PY{n+nx}{debug\PYZus{}message}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}execute\PYZus{}query (enter), statement = \PYZdq{}} \PY{o}{+} \PY{n+nx}{statement}\PY{p}{)}\PY{p}{;}
+                    \PY{n+nx}{logging}\PY{p}{.}\PY{n+nx}{debug\PYZus{}message}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}values = \PYZdq{}}\PY{p}{,} \PY{n+nx}{values}\PY{p}{)}\PY{p}{;}
+        
+                    \PY{k+kd}{var}		\PY{n+nx}{con}		\PY{o}{=}	\PY{n+nx}{mysql}\PY{p}{.}\PY{n+nx}{createConnection}\PY{p}{(}\PY{n+nx}{config}\PY{p}{.}\PY{n+nx}{db\PYZus{}connect\PYZus{}info}\PY{p}{)}\PY{p}{;}
+        
+                    \PY{n+nx}{logging}\PY{p}{.}\PY{n+nx}{debug\PYZus{}message}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}db.execute\PYZus{}query: After calling con create.\PYZdq{}}\PY{p}{)}\PY{p}{;}
+        
+                    \PY{n+nx}{con}\PY{p}{.}\PY{n+nx}{connect}\PY{p}{(}\PY{k+kd}{function}\PY{p}{(}\PY{n+nx}{err}\PY{p}{)} \PY{p}{\PYZob{}}
+                        \PY{k}{if} \PY{p}{(}\PY{n+nx}{err}\PY{p}{)} \PY{p}{\PYZob{}}
+                            \PY{n+nx}{logging}\PY{p}{.}\PY{n+nx}{error\PYZus{}message}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}DB Connect Failed, \PYZdq{}}\PY{p}{)}\PY{p}{;}
+                            \PY{n+nx}{reject}\PY{p}{(}\PY{n+nx}{err}\PY{p}{)}\PY{p}{;}			\PY{c+c1}{//	Return the promise error.}
+                        \PY{p}{\PYZcb{}}
+                        \PY{k}{else} \PY{p}{\PYZob{}}
+                            \PY{n+nx}{logging}\PY{p}{.}\PY{n+nx}{debug\PYZus{}message}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}Connected to DB\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        
+                            \PY{n+nx}{con}\PY{p}{.}\PY{n+nx}{query}\PY{p}{(}\PY{n+nx}{statement}\PY{p}{,} \PY{n+nx}{values}\PY{p}{,} \PY{k+kd}{function}\PY{p}{(}\PY{n+nx}{err}\PY{p}{,}\PY{n+nx}{result}\PY{p}{)}\PY{p}{\PYZob{}}		\PY{c+c1}{//	Execute the query.}
+                                \PY{k}{if} \PY{p}{(}\PY{n+nx}{err}\PY{p}{)} \PY{p}{\PYZob{}}
+                                    \PY{n+nx}{logging}\PY{p}{.}\PY{n+nx}{debug\PYZus{}message}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}Query failed with error = \PYZdq{}}\PY{p}{,} \PY{n+nx}{err}\PY{p}{)}\PY{p}{;}
+                                    \PY{n+nx}{con}\PY{p}{.}\PY{n+nx}{end}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+                                    \PY{n+nx}{reject}\PY{p}{(}\PY{n+nx}{err}\PY{p}{)}\PY{p}{;}
+                                \PY{p}{\PYZcb{}}
+                                \PY{k}{else} \PY{p}{\PYZob{}}
+                                    \PY{c+c1}{//logging.debug\PYZus{}message(\PYZdq{}Query statement = \PYZdq{} + statement + \PYZdq{}succeeded, rows = \PYZdq{}, result);}
+                                    \PY{n+nx}{logging}\PY{p}{.}\PY{n+nx}{debug\PYZus{}message}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}db.execute\PYZus{}query: After query, result = \PYZdq{}} \PY{o}{+} \PY{n+nx}{JSON}\PY{p}{.}\PY{n+nx}{stringify}\PY{p}{(}\PY{n+nx}{result}\PY{p}{,} \PY{k+kc}{null}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+                                    \PY{n+nx}{con}\PY{p}{.}\PY{n+nx}{end}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+                                    \PY{n+nx}{resolve}\PY{p}{(}\PY{n+nx}{result}\PY{p}{)}\PY{p}{;}						\PY{c+c1}{//	Return the response as promised.}
+                                \PY{p}{\PYZcb{}}
+                            \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+                        \PY{p}{\PYZcb{}}
+                    \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+                \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+            \PY{p}{\PYZcb{}}
+        
+            \PY{n+nx}{get\PYZus{}by\PYZus{}id}\PY{p}{(}\PY{n+nx}{id}\PY{p}{)} \PY{p}{\PYZob{}}
+                \PY{k+kd}{let} \PY{n+nx}{sql\PYZus{}statement} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}SELECT * FROM \PYZdq{}} \PY{o}{+} \PY{k}{this}\PY{p}{.}\PY{n+nx}{config}\PY{p}{.}\PY{n+nx}{data\PYZus{}table} \PY{o}{+}
+                    \PY{l+s+s2}{\PYZdq{} where \PYZdq{}} \PY{o}{+} \PY{k}{this}\PY{p}{.}\PY{n+nx}{config}\PY{p}{.}\PY{n+nx}{primary\PYZus{}key} \PY{o}{+} \PY{l+s+s2}{\PYZdq{} = ? \PYZdq{}}\PY{p}{;}
+                \PY{k}{return} \PY{k}{this}\PY{p}{.}\PY{n+nx}{execute\PYZus{}query}\PY{p}{(}\PY{n+nx}{sql\PYZus{}statement}\PY{p}{,} \PY{p}{[}\PY{n+nx}{id}\PY{p}{]}\PY{p}{,} \PY{k+kc}{null}\PY{p}{)}\PY{p}{;}
+            \PY{p}{\PYZcb{}}
+        
+        
+        \PY{p}{\PYZcb{}}
+        
+        \PY{k+kd}{let}	\PY{n+nx}{config} \PY{o}{=} \PY{p}{\PYZob{}}
+            \PY{n+nx}{db\PYZus{}connect\PYZus{}info}\PY{o}{:} \PY{p}{\PYZob{}}
+                \PY{n+nx}{host}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}localhost\PYZdq{}}\PY{p}{,}
+                \PY{n+nx}{user}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}dbuser\PYZdq{}}\PY{p}{,}
+                \PY{n+nx}{password}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}dbuser\PYZdq{}}
+            \PY{p}{\PYZcb{}}\PY{p}{,}
+            \PY{n+nx}{data\PYZus{}table}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}e6156.customers\PYZdq{}}\PY{p}{,}
+            \PY{n+nx}{primary\PYZus{}key}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}customers\PYZus{}id\PYZdq{}}
+        \PY{p}{\PYZcb{}}\PY{p}{;}
+        
+        \PY{k+kd}{let} \PY{n+nx}{d} \PY{o}{=} \PY{k}{new} \PY{n+nx}{Dao}\PY{p}{(}\PY{n+nx}{config}\PY{p}{)}\PY{p}{;}
+        \PY{n+nx}{d}\PY{p}{.}\PY{n+nx}{sayHello}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        \PY{n+nx}{d}\PY{p}{.}\PY{n+nx}{get\PYZus{}by\PYZus{}id}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}df1\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{then}\PY{p}{(}
+            \PY{k+kd}{function}\PY{p}{(}\PY{n+nx}{data}\PY{p}{)} \PY{p}{\PYZob{}}
+                \PY{l+s+s2}{\PYZdq{}use strict\PYZdq{}}\PY{p}{;}
+                \PY{n+nx}{logging}\PY{p}{.}\PY{n+nx}{debug\PYZus{}message}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}Data = \PYZdq{}}\PY{p}{,} \PY{n+nx}{data}\PY{p}{)}
+            \PY{p}{\PYZcb{}}
+        \PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+config = \{
+    "db\_connect\_info": \{
+        "host": "localhost",
+        "user": "dbuser",
+        "password": "dbuser"
+    \},
+    "data\_table": "e6156.customers",
+    "primary\_key": "customers\_id"
+\}
+execute\_query (enter), statement = SELECT * FROM e6156.customers where customers\_id = ? 
+values =  [
+  "df1"
+]
+db.execute\_query: After calling con create.
+Connected to DB
+db.execute\_query: After query, result = [
+  \{
+    "customers\_id": "df1",
+    "customers\_lastname": "Ferguson",
+    "customers\_firstname": "Donald",
+    "customers\_email": "dff9@columbia.edu",
+    "customers\_status": "ACTIVE",
+    "customers\_password": "lakd;lkasddjkl;sADJ"
+  \}
+]
+Data =  [
+  \{
+    "customers\_id": "df1",
+    "customers\_lastname": "Ferguson",
+    "customers\_firstname": "Donald",
+    "customers\_email": "dff9@columbia.edu",
+    "customers\_status": "ACTIVE",
+    "customers\_password": "lakd;lkasddjkl;sADJ"
+  \}
+]
+
+    \end{Verbatim}
+
+    \textbf{Questions?}
+
+\begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \subsubsection{Unpacking the Code Exposes some Critical
+Concepts}\label{unpacking-the-code-exposes-some-critical-concepts}
+
+\paragraph{Database Connection}\label{database-connection}
+
+\begin{longtable}[]{@{}c@{}}
+\toprule
+\includegraphics{attachment:image.png}\tabularnewline
+\midrule
+\endhead
+\textbf{Database Connection}\tabularnewline
+\bottomrule
+\end{longtable}
+
+"In computer science, a database connection is the means by which a
+database server and its client software communicate with each other. The
+term is used whether or not the client and the server are on different
+machines." (https://en.wikipedia.org/wiki/Database\_connection)
+
+\begin{itemize}
+\tightlist
+\item
+  Database systems and products provide client libraries and SDKs that
+  simplify using the database APIs.
+\end{itemize}
+
+\begin{verbatim}
+let config = {
+    db_connect_info: {
+        host: "localhost",
+        user: "dbuser",
+        password: "dbuser"
+    },
+    data_table: "e6156.customers",
+    primary_key: "customers_id"
+};
+\end{verbatim}
+
+In this simple example, the connection information is: - Host (Internet
+location of the database server)
+
+\begin{itemize}
+\item
+  User and password to associate with requests on this connection
+  (authentication, authorization)
+\item
+  There are many other "command and control" properties associated with
+  a connection.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n+nx}{d}\PY{p}{.}\PY{n+nx}{get\PYZus{}db\PYZus{}connection}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+db\_connect\_info =  \{
+  "host": "localhost",
+  "user": "dbuser",
+  "password": "dbuser"
+\}
+Created DB connection
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} Connection \{
+          domain: null,
+          \_events: \{\},
+          \_eventsCount: 0,
+          \_maxListeners: undefined,
+          config: 
+           ConnectionConfig \{
+             host: 'localhost',
+             port: 3306,
+             localAddress: undefined,
+             socketPath: undefined,
+             user: 'dbuser',
+             password: 'dbuser',
+             database: undefined,
+             connectTimeout: 10000,
+             insecureAuth: false,
+             supportBigNumbers: false,
+             bigNumberStrings: false,
+             dateStrings: false,
+             debug: undefined,
+             trace: true,
+             stringifyObjects: false,
+             timezone: 'local',
+             flags: '',
+             queryFormat: undefined,
+             pool: undefined,
+             ssl: false,
+             multipleStatements: false,
+             typeCast: true,
+             maxPacketSize: 0,
+             charsetNumber: 33,
+             clientFlags: 455631 \},
+          \_socket: undefined,
+          \_protocol: 
+           Protocol \{
+             domain: null,
+             \_events: \{\},
+             \_eventsCount: 0,
+             \_maxListeners: undefined,
+             readable: true,
+             writable: true,
+             \_config: 
+              ConnectionConfig \{
+                host: 'localhost',
+                port: 3306,
+                localAddress: undefined,
+                socketPath: undefined,
+                user: 'dbuser',
+                password: 'dbuser',
+                database: undefined,
+                connectTimeout: 10000,
+                insecureAuth: false,
+                supportBigNumbers: false,
+                bigNumberStrings: false,
+                dateStrings: false,
+                debug: undefined,
+                trace: true,
+                stringifyObjects: false,
+                timezone: 'local',
+                flags: '',
+                queryFormat: undefined,
+                pool: undefined,
+                ssl: false,
+                multipleStatements: false,
+                typeCast: true,
+                maxPacketSize: 0,
+                charsetNumber: 33,
+                clientFlags: 455631 \},
+             \_connection: [Circular],
+             \_callback: null,
+             \_fatalError: null,
+             \_quitSequence: null,
+             \_handshakeSequence: null,
+             \_handshaked: false,
+             \_ended: false,
+             \_destroyed: false,
+             \_queue: [],
+             \_handshakeInitializationPacket: null,
+             \_parser: 
+              Parser \{
+                \_supportBigNumbers: false,
+                \_buffer: <Buffer >,
+                \_longPacketBuffers: [],
+                \_offset: 0,
+                \_packetEnd: null,
+                \_packetHeader: null,
+                \_packetOffset: null,
+                \_onError: [Function: bound handleParserError],
+                \_onPacket: [Function: bound ],
+                \_nextPacketNumber: 0,
+                \_encoding: 'utf-8',
+                \_paused: false \} \},
+          \_connectCalled: false,
+          state: 'disconnected',
+          threadId: null \}
+\end{Verbatim}
+            
+     Changing the connection: - I made a similar database on
+\href{https://aws.amazon.com/rds/}{Amazon Relational Data Service}
+
+\begin{itemize}
+\tightlist
+\item
+  Created a table.
+\end{itemize}
+
+    \begin{figure}
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n+nx}{config4} \PY{o}{=} \PY{p}{\PYZob{}}
+            \PY{n+nx}{db\PYZus{}connect\PYZus{}info}\PY{o}{:} \PY{p}{\PYZob{}}
+                \PY{n+nx}{host}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}columbiae6156.cqgsme1nmjms.us\PYZhy{}east\PYZhy{}1.rds.amazonaws.com\PYZdq{}}\PY{p}{,}
+                \PY{n+nx}{user}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}dbuser2\PYZdq{}}\PY{p}{,}
+                \PY{n+nx}{password}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}dbuser2\PYZdq{}}
+            \PY{p}{\PYZcb{}}\PY{p}{,}
+            \PY{n+nx}{data\PYZus{}table}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}cloude6156.customers\PYZdq{}}\PY{p}{,}
+            \PY{n+nx}{primary\PYZus{}key}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}customers\PYZus{}id\PYZdq{}}
+        \PY{p}{\PYZcb{}}\PY{p}{;}
+        
+        \PY{n+nx}{d4} \PY{o}{=} \PY{k}{new} \PY{n+nx}{Dao}\PY{p}{(}\PY{n+nx}{config4}\PY{p}{)}\PY{p}{;}
+        \PY{n+nx}{d4}\PY{p}{.}\PY{n+nx}{get\PYZus{}by\PYZus{}id}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}dv1\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+execute\_query (enter), statement = SELECT * FROM cloude6156.customers where customers\_id = ? 
+values =  [
+  "dv1"
+]
+db.execute\_query: After calling con create.
+Connected to DB
+db.execute\_query: After query, result = [
+  \{
+    "customers\_id": "dv1",
+    "customers\_lastname": "Vader",
+    "customers\_firstname": "Darth",
+    "customers\_email": "dv@deathstar.empire.gov",
+    "customers\_status": "ACTIVE",
+    "customers\_password": ""
+  \}
+]
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} [ RowDataPacket \{
+            customers\_id: 'dv1',
+            customers\_lastname: 'Vader',
+            customers\_firstname: 'Darth',
+            customers\_email: 'dv@deathstar.empire.gov',
+            customers\_status: 'ACTIVE',
+            customers\_password: '' \} ]
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
