@@ -106,7 +106,9 @@ define a fantasy league, assign players to teams, etc. The database is a newly d
 
 ## Lecture Material
 
-The lecture material for fall 2019 is in progress. 
+Lecture 1: Introduction and First Microservice
+- [HTML](Lectures/Lecture1/E6156-f2018-Lecture-1.html)
+- [Jupyter Notebook](Lectures/Lecture1/E6156-f2018-Lecture-1.ipynb)
 
 ## Examples
 
