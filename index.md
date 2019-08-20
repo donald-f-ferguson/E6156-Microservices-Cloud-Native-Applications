@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# E6156 - Topics in Software Engineering: Cloud Native Applications
+# E6156 - Topics in Software Engineering: Microservices and Cloud Native Applications
 
 ## Overview
 
