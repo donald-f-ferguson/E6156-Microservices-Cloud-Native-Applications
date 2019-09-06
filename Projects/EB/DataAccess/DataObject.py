@@ -1,7 +1,15 @@
 import DataAccess.DataAdaptor as data_adaptor
 from abc import ABC, abstractmethod
+import pymysql.err
 
+class DataException(Exception):
 
+    unknown_error   =   1001
+    duplicate_key   =   1002
+
+    def __init__(self, code=unknown_error, msg="Something awful happened."):
+        self.code = code
+        self.msg = msg
 
 class BaseDataObject(ABC):
 
@@ -32,6 +40,29 @@ class UsersRDB(BaseDataObject):
             result = None
 
         return result
+
+    @classmethod
+    def create_user(cls, user_info):
+
+        result = None
+
+        try:
+            sql, args = data_adaptor.create_insert(table_name="users", row=user_info)
+            res, data = data_adaptor.run_q(sql, args)
+            if res != 1:
+                result = None
+            else:
+                result = user_info['id']
+        except pymysql.err.IntegrityError as ie:
+            if ie.args[0] == 1062:
+                raise (DataException(DataException.duplicate_key))
+            else:
+                raise DataException()
+        except Exception as e:
+            raise DataException()
+
+        return result
+
 
 
 

@@ -210,3 +210,4 @@ def create_update(table_name, new_values, template):
     return sql, args
 
 
+
