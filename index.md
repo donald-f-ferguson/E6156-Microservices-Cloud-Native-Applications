@@ -106,9 +106,16 @@ define a fantasy league, assign players to teams, etc. The database is a newly d
 
 ## Lecture Material
 
-Lecture 1: Introduction and First Microservice
-- [HTML](Lectures/Lecture1/E6156-f2018-Lecture-1.html)
-- [Jupyter Notebook](Lectures/Lecture1/E6156-f2018-Lecture-1.ipynb)
+- Lecture 1: Introduction and First Microservice
+    - [HTML](Lectures/Lecture1/E6156-f2018-Lecture-1.html)
+    - [Jupyter Notebook](Lectures/Lecture1/E6156-f2018-Lecture-1.ipynb)
+- Lecture 2: PaaS, Elastic Beanstalk, Microservices
+    - [HTML](Lectures/Lecture2/E6156-f2019-Lecture-2.html)
+    - [Jupyter Notebook](Lectures/Lecture2/E6156-f2019-Lecture-2.ipynb)
+- Lecture 3: REST, Lambda Functions, etc.
+    - [HTML](Lectures/Lecture 3/E6156-f2019-Lecture-3.html)
+    - [Jupyter Notebook](Lectures/Lecture 3/E6156-f2019-Lecture-3.ipynb)
+
 
 ## Examples
 
