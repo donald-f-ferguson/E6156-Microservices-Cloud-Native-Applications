@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <title>E6156: Cloud Native Applications</title>
+
+      <!-- Bootstrap core CSS -->
+      <link href="./vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+      <link href="./bootstrap-social-gh-pages/bootstrap-social.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/small-business.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-route.js"></script>
+    <script src="app_module.js"></script>
+
+    <!-- DFF -->
+    <script src="./homeController.js"></script>
+    <script src="./profileController.js"></script>
+    <script src="//connect.facebook.net/en_US/all.js"></script>
+
+  </head>
+
+  <body ng-app="CustomerApp" ng-controller="homeController">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Welcome to E6156: Cloud Native Applications</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li id="home" ng-click="navMenu('home')" ng-class="getNavClass('home')">
+              <a class="nav-link" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li ng-click="navMenu('about')" ng-class="getNavClass('about')">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li ng-click="navMenu('Baseball')" ng-class="getNavClass('baseball')">
+              <a class="nav-link" href="#!/baseball">Baseball</a>
+            </li>
+            <li ng-click="navMenu('services')" ng-class="getNavClass('services')">
+              <a class="nav-link" href="#">Services</a>
+            </li>
+            <li ng-click="navMenu('contact')" ng-class="getNavClass('contact')"">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+            <li ng-click="navMenu('login')" ng-class="getNavClass('login')" ng-show="!loginRegisterResult">
+              <a class="nav-link" ng-click="doLogin()">Login</a>
+            </li>
+            <li ng-click="navMenu('logout')" ng-class="getNavClass('logout')" ng-show="loginRegisterResult">
+              <a class="nav-link" ng-click="doLogout()">Logout</a>
+            </li>
+            <li ng-click="navMenu('profile')" ng-class="getNavClass('profile')" ng-show="loginRegisterResult">
+              <a class="nav-link" href="#!/profile">My Profile/My Account</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div ng-view></div>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//d79i1fxsrar4t.cloudfront.net/jquery.liveaddress/5.1/jquery.liveaddress.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//d79i1fxsrar4t.cloudfront.net/jquery.liveaddress/5.1/jquery.liveaddress.min.js"></script>
+
+
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>

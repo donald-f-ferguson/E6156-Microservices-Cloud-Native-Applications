@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+
+</script>
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<script>
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '340974923143746',
+            cookie     : true,
+            xfbml      : true
+            //version    : '3.0'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        //js.src = "https://connect.facebook.net/en_US/sdk.js";
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    let fb_login_response = null;
+
+    let testLogin   =   function() {
+        console.log("In testLogin");
+        FB.login(function(response) {
+            console.log("Facebook login response: " + JSON.stringify(response, null, 2));
+            if (response.authResponse) {
+                fb_login_response = {};
+                fb_login_response.socialToken = response.authResponse.accessToken;
+                fb_login_response.socialId = response.authResponse.userID;
+                fb_login_response.type = 2;
+                console.log(JSON.stringify(fb_login_response, null, 2));
+            }
+            else {
+                console.log("Unknown logon failure.");
+            }
+        });
+
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                // the user is logged in and has authenticated your
+                // app, and response.authResponse supplies
+                // the user's ID, a valid access token, a signed
+                // request, and the time the access token
+                // and signed request each expire
+                var uid = response.authResponse.userID;
+                var accessToken = response.authResponse.accessToken;
+            }
+            if (response.status === 'not_authorized') {
+                console.log("Status = ", JSON.stringify(response));
+
+                // the user is logged in to Facebook,
+                // but has not authenticated your app
+            }
+            else {
+                console.log("Boom.")
+                // the user isn't logged in to Facebook.
+            }
+        });
+
+        FB.api(
+            '/me',
+            'get',
+            {
+                fields: "about,age_range,email",
+              //  access_token : 'EAACEdEose0cBAHiaevMYBjvmOc06iAOujklbFsMDp2NMRZApKeZACrFXDnZA3NTqeHJCzDf3Qd6ybLsluJeRJW0cjRZBlohHMcCYrbyHos0KojgNgscd33wKNLZCcUaYe7a1hZAh9fkuWijF4Su3ZC60bpHwRrD1h564PbbZCgrxHp8rn9jgufT2eZAdoRETi5gYZD',
+            },
+            function(response) {
+                console.log("Response = " + JSON.stringify(response, null, 2));
+            }
+        )
+    }
+
+
+    //
+    //console.log(JSON.stringify(response));
+
+</script>
+</head>
+<button onclick="testLogin()">Button</button><br>
+<body>
+
+</body>
+</html>

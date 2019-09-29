@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+</head>
+<script>
+
+
+
+</script>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+<h1>E6156 Facebook Login</h1>
+<p>I dare you to click the button.</p>
+<button ng-click="testLogin()">Button</button><br>
+<div ng-show="info">
+    <h2>Would you like to use this registration information?</h2>
+    <ul>
+        <li>Last name: {{info.last_name}}</li>
+        <li>First name: {{info.first_name}}</li>
+        <li>Last name: {{info.email}}</li>
+    </ul>
+</div>
+
+<script>
+let app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope) {
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '340974923143746',
+            cookie     : true,
+            xfbml      : true
+            //version    : '3.0'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        //js.src = "https://connect.facebook.net/en_US/sdk.js";
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    let fb_login_response = null;
+
+    $scope.testLogin   =   function() {
+        console.log("In testLogin");
+        FB.login(function(response) {
+            console.log("Facebook login response: " + JSON.stringify(response, null, 2));
+            if (response.authResponse) {
+                fb_login_response = {};
+                fb_login_response.socialToken = response.authResponse.accessToken;
+                fb_login_response.socialId = response.authResponse.userID;
+                fb_login_response.type = 2;
+                console.log(JSON.stringify(fb_login_response, null, 2));
+            }
+            else {
+                console.log("Unknown logon failure.");
+            }
+        });
+
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                // the user is logged in and has authenticated your
+                // app, and response.authResponse supplies
+                // the user's ID, a valid access token, a signed
+                // request, and the time the access token
+                // and signed request each expire
+                var uid = response.authResponse.userID;
+                var accessToken = response.authResponse.accessToken;
+            }
+            if (response.status === 'not_authorized') {
+                console.log("Status = ", JSON.stringify(response));
+
+                // the user is logged in to Facebook,
+                // but has not authenticated your app
+            }
+            else {
+                console.log("Boom.")
+                // the user isn't logged in to Facebook.
+            }
+        });
+
+        FB.api(
+            '/me',
+            'get',
+            {
+                fields: "about,age_range,email,first_name,last_name",
+                //  access_token : 'EAACEdEose0cBAHiaevMYBjvmOc06iAOujklbFsMDp2NMRZApKeZACrFXDnZA3NTqeHJCzDf3Qd6ybLsluJeRJW0cjRZBlohHMcCYrbyHos0KojgNgscd33wKNLZCcUaYe7a1hZAh9fkuWijF4Su3ZC60bpHwRrD1h564PbbZCgrxHp8rn9jgufT2eZAdoRETi5gYZD',
+            },
+            function(response) {
+                console.log("Response = " + JSON.stringify(response, null, 2));
+                $scope.info = response;
+                $scope.$apply()
+            }
+        )
+    }
+
+
+    //
+    //console.log(JSON.stringify(response));
+});
+</script>
+
+
+</body>
+</html>
+</html>

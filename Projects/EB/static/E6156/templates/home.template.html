@@ -1,0 +1,93 @@
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Heading Row -->
+    <div class="row my-4">
+        <div class="col-lg-8">
+            <img class="img-fluid rounded" src="images/columbia.jpg" alt="">
+        </div>
+        <!-- /.col-lg-8 -->
+        <div ng-show="!loginRegisterResult" class="col-lg-4">
+            <h3>E6156</h3>
+            <h4>Cloud Native Applications</h4>
+            <h5>Sample Application Homepage</h5>
+            <p>This page uses:</p>
+            <ul>
+                <li><a href="https://getbootstrap.com/">Bootstrap</a></li>
+                <li><a href="https://startbootstrap.com/template-overviews/small-business/">A Bootstrap theme/template</a></li>
+                <li><a href="https://angularjs.org/">AngularJS</a></li>
+            </ul>
+            <a class="btn btn-primary btn-lg" href="https://www.youtube.com/watch?v=f8e3JVFRIEk">Call to Action!</a>
+        </div>
+        <div ng-show="loginRegisterResult" class="col-lg-4">
+            <h3>COMSW E6146</h3>
+            <h4>Topics in SW Engineering</h4>
+            <h4>Microservices and Cloud Apps</h4>
+            <p>Welcome:</p>
+            <ul>
+                <li>{{customerInfo.lastName}}, {{customerInfo.firstName}}</li>
+                <li>{{customerInfo.email}}</li>
+                <li>Customer Since: {{customerInfo.created}}</li>
+            </ul>
+            <a class="btn btn-primary btn-lg" href="https://www.youtube.com/watch?v=f8e3JVFRIEk">Call to Action!</a>
+        </div>
+        <!-- /.col-md-4 -->
+    </div>
+    <!-- /.row -->
+
+    <!-- Call to Action Well -->
+    <div class="card text-white bg-secondary my-4 text-center">
+        <div class="card-body">
+            <p class="text-white m-0">I am supposed to supply a clever tagline here. Here it is. <span style="color:yellow;">
+            <strong>I am really bad at HTML page layout.</strong></span></p>
+            <form>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+        <div  class="col-md-4 mb-4">
+            <div ng-show="!loginRegisterResult"class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Some Latin</h2>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                </div>
+                <div class="card-footer">
+                    <a ng-click="doAddressModal()" class="btn btn-primary">Change Address</a>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-md-4 -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Card Two</h2>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">More Info</a>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-md-4 -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Card Three</h2>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">More Info</a>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-md-4 -->
+
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Small Business - Start Bootstrap Template</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="css/small-business.css" rel="stylesheet">
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+        <script src="controller.js"></script>
+        <!-- DFF -->
+
+    </head>
+
+    <body ng-app="myApp" ng-controller="myCtrl">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+        <a class="nav-link" href="#">Home
+        <span class="sr-only">(current)</span>
+        </a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Services</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+        </li>
+        </ul>
+        </div>
+        </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div class="container">
+
+
+            <!-- Heading Row -->
+            <div class="row my-4">
+                <div class="col-lg">
+                    <h1>COMSW4111 - Totally Awesome Web App</h1>
+                    <p>The implementation consists of:</p>
+                    <ul>
+                    <li><a href="https://getbootstrap.com/">Boostrat</a></li>
+                    <li>A modification to a prebuilt Bootstrap <a href="https://startbootstrap.com/template-overviews/small-business/">theme/template.</a></li>
+                    <li>A custom written <a href="https://angularjs.org/">AngularJS</a> controller.</li>
+                    </ul>
+                    <a class="btn btn-primary btn-lg" href="https://www.youtube.com/watch?v=f8e3JVFRIEk">Call to Action!</a>
+                </div>
+
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" role="dialog">
+                <div class="modal-dialog">
+
+                <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Nothing Found.</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Search did not return any data.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Search</h2>
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="radio">
+                                        <label><input ng-model="search_type" type="radio" value="{{searchStates.byId}}"
+                                                name="radio1" >&nbsp;&nbsp;By player ID</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="row radio">
+                                        <label><input ng-model="search_type" type="radio" value="{{ searchStates.byName }}"
+                                                name="radio1">&nbsp;&nbsp;By name</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div  ng-show="search_type==searchStates.byId" class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Player ID:</span>
+                                </div>
+                                <input type="text" ng-model="inputPlayerId" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+
+                            </div>
+                            <div  ng-show="search_type==searchStates.byName" class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">nameLast:</span>
+                                </div>
+                                <input type="text" ng-model="inputLastName" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                            <div  ng-show="search_type==searchStates.byName" class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">nameFirst:</span>
+                                </div>
+                                <input type="text" ng-model="inputFirstName" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a ng-show="canLookup()" ng-click="doButton()" href="#" class="btn btn-primary">{{ currentButtonState.msg }}</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+
+            </div>
+            <div ng-show="showPeople()" class="row">
+                <div class="col-lg-12">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Result</h2>
+                            <p class="card-text">Player Information</p>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Player ID</th>
+                                        <th scope="col">Last name</th>
+                                        <th scope="col">First name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-click="details($index)" ng-repeat="k in currentPeople">
+                                        <td>{{ k.playerID }}</td>
+                                        <td>{{ k.nameLast }}</td>
+                                        <td>{{ k.nameFirst }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="card-footer"> -->
+
+
+                <div ng-show="havePaging" class="row my-2">
+                    <div ng-show="havePrev" class="col-lg">
+                        <div class="col-lg-8"><input ng-click="doPrev()" type="button" class="btn btn-outline-primary" value="Previous"></div>
+                    </div>
+                    <div ng-show="haveNext" class="col-lg">
+                        <div class="col-lg-8"><input ng-click="doNext()" type="button" class="btn btn-outline-primary float-right" value="Next"></div>
+                    </div>
+                </div>
+                <!-- </div> -->
+            </div>
+            <div ng-show="showDetails" class="row">
+                <div class="col-lg-12">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Player Details</h2>
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Full name:</td>
+                                                <td>{{ battingInfo.player_info.fullName }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>DOB:</td>
+                                                <td>{{ battingInfo.player_info.DOB }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>DOD:</td>
+                                                <td>{{ battingInfo.player_info.DOD }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-5">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Throws:</td>
+                                                <td>{{ battingInfo.player_info.throws }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Bats</td>
+                                                <td>{{ battingInfo.player_info.bats }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Height</td>
+                                                <td>{{ battingInfo.player_info.height }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Weight</td>
+                                                <td>{{ battingInfo.player_info.weight }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <p>Batting</p>
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Year</th>
+                                                <th scope="col">Team</th>
+                                                <th scope="col">AB</th>
+                                                <th scope="col">H</th>
+                                                <th scope="col">HR</th>
+                                                <th scope="col">RBI</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="b in battingInfo.batting">
+                                                <td>{{ b.yearID }}</td>
+                                                <td>{{ b.teamID }}</td>
+                                                <td>{{ b.AB }}</td>
+                                                <td>{{ b.H }}</td>
+                                                <td>{{ b.HR }}</td>
+                                                <td>{{ b.RBI }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="card-footer"> -->
+
+
+
+                <div class="col-lg-8"><input ng-click="doCloseDetails()" type="button" class="btn btn-outline-primary" value="Done"></div>
+
+                <!-- </div> -->
+           </div>
+        </div>
+        <!-- /.container -->
+
+        <!-- Footer -->
+        <footer class="py-5 bg-dark">
+          <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+          </div>
+          <!-- /.container -->
+        </footer>
+
+        <!-- Bootstrap core JavaScript -->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>
