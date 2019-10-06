@@ -1,6 +1,6 @@
 import pymysql
 import copy
-from Context.Context import Context
+from Projects.EB.Context.Context import Context
 
 import logging
 logger = logging.getLogger()

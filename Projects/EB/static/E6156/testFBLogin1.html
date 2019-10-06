@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Facebook Login JavaScript Example</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div ng-app="apiController" ng-controller="myCtrl">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="/apiController.js"></script>
+    <script>
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '317728141922775',
+                cookie     : true,  // enable cookies to allow the server to access
+                                    // the session
+                xfbml      : true,  // parse social plugins on this page
+                version    : 'v2.5' // use graph api version 2.5
+            });
+
+            // Now that we've initialized the JavaScript SDK, we call
+            // FB.getLoginStatus().  This function gets the state of the
+            // person visiting this page and can return one of three states to
+            // the callback you provide.  They can be:
+            //
+            // 1. Logged into your app ('connected')
+            // 2. Logged into Facebook, but not your app ('not_authorized')
+            // 3. Not logged into Facebook and can't tell if they are logged into
+            //    your app or not.
+            //
+            // These three cases are handled in the callback function.
+
+        };
+
+        // Load the SDK asynchronously
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+    </script>
+
+    <!--
+      Below we include the Login Button social plugin. This button uses
+      the JavaScript SDK to present a graphical Login button that triggers
+      the FB.login() function when clicked.
+    -->
+
+    <h1 style="text-align: center;">COMSE6998-014: Microservice and Cloud Applications</h1>
+    <p>
+        This is without a doubt the totally coolest course on the Columbia syllabus, taught
+        by an adjunct professor who is too cool for school. In this lecture you
+        learn:
+        <ol>
+            <li>How to login to an application with Facebook.
+            <li>General concepts around OAuth2
+            <li>How this all fits into a larger security model.
+        </ol>
+    <p>
+
+    <!--
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button>
+    -->
+    <div ng-click="login()">
+        <img src="./facebook_login.png" style="width:40%;"><br>
+        <span>Log In with Facebook</span>
+    </div>
+    <p>
+        I am just going to check the login status.
+    </p>
+    <div ng-click="checkStatus()">
+        <button type="button">Check my status with FB</button>
+        <span>Check status.</span>
+    </div>
+
+    <div>
+        <p>
+        Full Name: {{data.name}}<br>
+        email: {{data.email}}<br>
+        security token: {{secret}}<br>
+        </p>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-import DataAccess.DataAdaptor as data_adaptor
+import Projects.EB.DataAccess.DataAdaptor as data_adaptor
 from abc import ABC, abstractmethod
 import pymysql.err
 
@@ -62,6 +62,14 @@ class UsersRDB(BaseDataObject):
             raise DataException()
 
         return result
+
+    @classmethod
+    def delete_user(cls, email):
+        pass
+
+    @classmethod
+    def update_user(cls, email, data):
+        pass
 
 
 

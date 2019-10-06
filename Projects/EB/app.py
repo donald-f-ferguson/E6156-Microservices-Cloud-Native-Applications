@@ -9,8 +9,8 @@ from flask import Flask, Response, request
 from datetime import datetime
 import json
 
-from CustomerInfo.Users import UsersService as UserService
-from Context.Context import Context
+from Projects.EB.CustomerInfo.Users import UsersService as UserService
+from Projects.EB.Context.Context import Context
 
 # Setup and use the simple, common Python logging framework. Send log messages to the console.
 # The application should get the log level out of the context. We will change later.

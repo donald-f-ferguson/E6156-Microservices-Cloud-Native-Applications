@@ -1,6 +1,8 @@
+
+
 from abc import ABC, abstractmethod
-from Context.Context import Context
-from DataAccess.DataObject import UsersRDB as UsersRDB
+from Projects.EB.Context.Context import Context
+from Projects.EB.DataAccess.DataObject import UsersRDB as UsersRDB
 
 # The base classes would not be IN the project. They would be in a separate included package.
 # They would also do some things.
@@ -61,6 +63,14 @@ class UsersService(BaseService):
         result = UsersRDB.create_user(user_info=user_info)
 
         return result
+
+    @classmethod
+    def delete_user(cls, email):
+        pass
+
+    @classmethod
+    def update_user(cls, email, data):
+        pass
 
 
 
