@@ -30,4 +30,8 @@ def generate_token(info):
     return h
 
 
+def authorize(url, method, token):
+    pass
+
+
 

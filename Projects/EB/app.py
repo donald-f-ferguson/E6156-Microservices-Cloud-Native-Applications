@@ -22,11 +22,15 @@ from Projects.EB.Middleware.middleware import MWResponse as MWResponse
 from functools import wraps
 from flask import g, request, redirect, url_for
 
+import Projects.EB.Middleware.notification as notification_middleware
+import Projects.EB.Middleware.security as security_middleware
+
+
+
 def login_required(f):
-    print("Hello ...")
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        print("Dude.")
+        print("\nDecorator was called!!!!. Request = ", request)
         return f(*args, **kwargs)
     return decorated_function
 
@@ -54,6 +58,9 @@ instructions = '''
 home_link = '<p><a href="/">Back</a></p>\n'
 footer_text = '</body>\n</html>'
 
+
+from Projects.EB.Middleware.middleware import SimpleMiddleWare as SimpleM
+
 # EB looks for an 'application' callable by default.
 # This is the top-level application that receives and routes requests.
 application = Flask(__name__)
@@ -61,9 +68,22 @@ application = Flask(__name__)
 # Middleware
 application.wsgi_app = SimpleM(application.wsgi_app)
 
+
+@application.before_request
+def before_decorator():
+    print(".... In before decorator ...")
+
+
+@application.after_request
+def after_decorator(rsp):
+    print("... In after decorator ...")
+    return rsp
+
+
 # add a rule for the index page. (Put here by AWS in the sample)
 application.add_url_rule('/', 'index', (lambda: header_text +
     say_hello() + instructions + footer_text))
+
 
 # add a rule when the page is accessed with a name appended to the site
 # URL. Put here by AWS in the sample
@@ -77,9 +97,6 @@ _default_context = None
 _user_service = None
 _registration_service = None
 
-def bob():
-    print("Bob")
-    print("Request = ", request)
 
 def _get_default_context():
 
@@ -199,7 +216,8 @@ def user_email(email):
 
     global _user_service
 
-    inputs = log_and_extract_input(demo, { "parameters": email })
+    inputs = log_and_extract_input(demo, {"parameters": email})
+
     rsp_data = None
     rsp_status = None
     rsp_txt = None
@@ -349,7 +367,47 @@ def login():
 
     return full_rsp
 
+
+@application.route("/api/test_middleware/<parameter>", methods=["GET", "PUT", "DELETE", "POST"])
+def test_middleware(parameter):
+
+    security_middleware.authorize(request.url, request.method,
+                                  request.headers.get("Authorization", None))
+    logger.debug("/api/user/<email>" + json.dumps(request, default=str))
+
+    # Other middleware goes here ...
+
+
+    # Now do the application functions.
+
+
+    # And now do the functions for post processing the request.
+    logger.debug("/api/user/<email>" + json.dumps(request, default=str))
+    if request.method in ('POST', 'PUT', 'DELETE'):
+        notification_middleware.publish_change_event(request.url, request.json)
+
+    # More stuff goes here.
+
+    return "something"
+
+
+def do_something_before():
+    print("\n")
+    print("***************** Do something before got ... **************", request)
+    print("\n")
+
+
+def do_something_after(rsp):
+    print("\n")
+    print("***************** Do something AFTER got ... **************", request)
+    print("\n")
+    return rsp
+
+
+
 logger.debug("__name__ = " + str(__name__))
+
+
 # run the app.
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
@@ -360,5 +418,6 @@ if __name__ == "__main__":
     init()
 
     application.debug = True
-    application.before_request(bob)
+    application.before_request(do_something_before)
+    application.after_request(do_something_after)
     application.run(port=5033)

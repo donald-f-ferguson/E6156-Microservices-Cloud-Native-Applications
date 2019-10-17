@@ -12,9 +12,7 @@ class SimpleMiddleWare(object):
         self.app = app
 
     def __call__(self, environ, start_response):
-        print ("something you want done in every http request")
-        #print("request = ", json.dumps(request, indent=2, default=str))
-        #print("environ = ", json.dumps(environ, indent=2, default=str))
+        print ("\n\nSimpleMiddlewareObject: something you want done in every http request")
         return self.app(environ, start_response)
 
 
@@ -23,7 +21,7 @@ class MWResponse(wResponse):
     def __init__(self, response=None, status=None, headers=None,
                  mimetype=None, content_type=None, direct_passthrough=None):
         super().__init__(response, status, headers, mimetype, content_type, direct_passthrough)
-        print("Middleware called!")
+        print("\nMWResponse was used in place of just response!")
 
 
 def login_required(f):
