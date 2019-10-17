@@ -19,7 +19,7 @@ def _get_default_connection():
             host=c_info['host'],
             user=c_info['user'],
             password=c_info['password'],
-            port=c_info['port'],
+            port=c_info.get('port', 3306),
             db='e6156',
             charset='utf8mb4',
             cursorclass=pymysql.cursors.DictCursor
@@ -39,6 +39,7 @@ def get_connection(c_info=None):
         cursorclass=pymysql.cursors.DictCursor
     )
     return result
+
 
 def get_connection_and_cursor(connect_info=None):
 

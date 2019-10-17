@@ -1,33 +1,25 @@
+from Projects.EB.DataAccess.BaseDataObject import BaseDataObject, DataException
+from Projects.EB.DataAccess.RDBDataObject import RDBDataObject
+import pymysql
 import Projects.EB.DataAccess.DataAdaptor as data_adaptor
-from abc import ABC, abstractmethod
-import pymysql.err
 
-class DataException(Exception):
 
-    unknown_error   =   1001
-    duplicate_key   =   1002
+class UsersRDB(RDBDataObject):
 
-    def __init__(self, code=unknown_error, msg="Something awful happened."):
-        self.code = code
-        self.msg = msg
-
-class BaseDataObject(ABC):
-
-    def __init__(self):
-        pass
 
     @classmethod
-    @abstractmethod
-    def create_instance(cls, data):
-        pass
+    def _get_table_info(cls):
 
+        info = {
+            "table_name": "e6156.users"
+        }
+        return info
 
-class UsersRDB(BaseDataObject):
-
-    def __init__(self, ctx):
-        super().__init__()
-
-        self._ctx = ctx
+    @classmethod
+    def get_table_name(cls):
+        t_info = cls._get_table_info()
+        result = t_info['table_name']
+        return result
 
     @classmethod
     def get_by_email(cls, email):
@@ -40,6 +32,7 @@ class UsersRDB(BaseDataObject):
             result = None
 
         return result
+
 
     @classmethod
     def create_user(cls, user_info):

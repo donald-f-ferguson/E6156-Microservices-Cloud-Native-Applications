@@ -4,6 +4,7 @@ CustomerApp.controller("ProfileController", function($scope, $http, $location, $
 
     console.log("Profile controller loaded.")
 
+    /*
     let s3 = jQuery.LiveAddress({
         key: "18981749384552786",
         waitForStreet: true,
@@ -21,6 +22,7 @@ CustomerApp.controller("ProfileController", function($scope, $http, $location, $
         console.log(JSON.stringify(data.response, null,3))
 
     });
+    */
 
     $scope.placeholder = "enter an address and select a choice."
 
