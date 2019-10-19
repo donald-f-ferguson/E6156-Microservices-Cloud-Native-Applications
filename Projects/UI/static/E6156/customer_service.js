@@ -17,6 +17,8 @@
             // This is also not a good way to do this anymore.
             var sStorage = $window.sessionStorage;
 
+            var customer_service_base_url = "http://127.0.0.1:5031/api"
+
             return {
                 get_version: function () {
                     return ("1234");
@@ -25,7 +27,7 @@
 
                     return new Promise(function(resolve, reject) {
                         console.log("Driving login.")
-                        var url = baseUrl + "/login";
+                        var url = customer_service_base_url + "/login";
                         console.log("email = " + email);
                         console.log("PW = " + pw);
 
@@ -51,7 +53,7 @@
                 },
                 getCustomer: function (email) {
                     return new Promise(function(resolve, reject) {
-                        var url = baseUrl + "/user/" + email;
+                        var url = customer_service_base_url + "/user/" + email;
 
                         $http.get(url).success(
                             function (data, status, headers) {
