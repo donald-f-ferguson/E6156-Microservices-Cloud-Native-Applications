@@ -1,0 +1,203 @@
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Heading Row -->
+    <div class="row my-4">
+        <div class="col-lg-8">
+            <img class="img-fluid rounded" src="images/columbia.jpg" alt="">
+        </div>
+        <!-- /.col-lg-8 -->
+        <div ng-show="!loginRegisterResult" class="col-lg-4">
+            <h3>W4111</h3>
+            <h4>Introduction to Databases</h4>
+            <h5>First Web Application</h5>
+            <p>Use this page to ...</p>
+            <ul>
+                <li>Search for information on players/teams/etc. </li>
+                <li>Build a team.</li>
+                <li>Check results and standings.</li>
+            </ul>
+            <a class="btn btn-primary btn-lg" href="https://www.youtube.com/watch?v=f8e3JVFRIEk">Call to Action!</a>
+        </div>
+        <!-- /.col-md-4 -->
+    </div>
+    <!-- /.row -->
+
+    <!-- Call to Action Well -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title" ng-click="boo()">Search</h2>
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="radio">
+                                <label><input ng-model="search_type" type="radio" value="{{searchStates.byId}}"
+                                        name="radio1" >&nbsp;By player ID</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="row radio">
+                                <label><input ng-model="search_type" type="radio" value="{{ searchStates.byName }}"
+                                        name="radio1">&nbsp;&nbsp;By name</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div  ng-show="search_type==searchStates.byId" class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm2">Player ID:</span>
+                        </div>
+                        <input type="text"  ng-model="input.playerId"
+                            class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+
+
+                    </div>
+                    <div  ng-show="search_type==searchStates.byName" class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">nameLast:</span>
+                        </div>
+                        <input type="text" ng-model="inputLastName" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    <div  ng-show="search_type==searchStates.byName" class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">nameFirst:</span>
+                        </div>
+                        <input type="text" ng-model="inputFirstName" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a ng-show="canLookup()" ng-click="doButton()" href="#" class="btn btn-primary">{{ currentButtonState.msg }}</a>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+
+    </div>
+    <div ng-show="showPeople()" class="row">
+        <div class="col-lg-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Result</h2>
+                    <p class="card-text">Player Information</p>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Player ID</th>
+                                <th scope="col">Last name</th>
+                                <th scope="col">First name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-click="details($index)" ng-repeat="k in currentPeople">
+                                <td>{{ k.playerID }}</td>
+                                <td>{{ k.nameLast }}</td>
+                                <td>{{ k.nameFirst }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="card-footer"> -->
+
+
+        <div ng-show="havePaging" class="row my-2">
+            <div ng-show="havePrev" class="col-lg">
+                <div class="col-lg-8"><input ng-click="doPrev()" type="button" class="btn btn-outline-primary" value="Previous"></div>
+            </div>
+            <div ng-show="haveNext" class="col-lg">
+                <div class="col-lg-8"><input ng-click="doNext()" type="button" class="btn btn-outline-primary float-right" value="Next"></div>
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>
+    <div ng-show="showDetails" class="row">
+        <div class="col-lg-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Player Details</h2>
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Full name:</td>
+                                        <td>{{ battingInfo.player_info.fullName }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DOB:</td>
+                                        <td>{{ battingInfo.player_info.DOB }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DOD:</td>
+                                        <td>{{ battingInfo.player_info.DOD }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-lg-5">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Throws:</td>
+                                        <td>{{ battingInfo.player_info.throws }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bats</td>
+                                        <td>{{ battingInfo.player_info.bats }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Height</td>
+                                        <td>{{ battingInfo.player_info.height }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Weight</td>
+                                        <td>{{ battingInfo.player_info.weight }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <p>Batting</p>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Year</th>
+                                        <th scope="col">Team</th>
+                                        <th scope="col">AB</th>
+                                        <th scope="col">H</th>
+                                        <th scope="col">HR</th>
+                                        <th scope="col">RBI</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="b in battingInfo.batting">
+                                        <td>{{ b.yearID }}</td>
+                                        <td>{{ b.teamID }}</td>
+                                        <td>{{ b.AB }}</td>
+                                        <td>{{ b.H }}</td>
+                                        <td>{{ b.HR }}</td>
+                                        <td>{{ b.RBI }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="card-footer"> -->
+
+
+
+        <div class="col-lg-8"><input ng-click="doCloseDetails()" type="button" class="btn btn-outline-primary" value="Done"></div>
+
+        <!-- </div> -->
+   </div>
+
+
+
+</div>
+<!-- /.container -->
