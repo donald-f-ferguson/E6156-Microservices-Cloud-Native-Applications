@@ -4,7 +4,9 @@ null = None
 true = True
 
 test_event_1 = {
-  "body": "eyJ0ZXN0IjoiYm9keSJ9",
+  "body": {
+    "msg": "message"
+  },
   "resource": "/{proxy+}",
   "path": "/path/to/resource",
   "httpMethod": "POST",
@@ -160,7 +162,7 @@ test_event_2= {
 }
 
 print("\n\nTesting API Gateway Proxy event\n\n")
-l_template.lambda_handler(test_event_1, None)
+rsp = l_template.lambda_handler(test_event_1, None)
 
-print("\n\nTesting SNS event\n\n")
-l_template.lambda_handler(test_event_2, None)
+print("Lambda response = ", rsp)
+

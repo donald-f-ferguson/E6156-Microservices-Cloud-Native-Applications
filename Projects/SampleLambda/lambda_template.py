@@ -1,10 +1,15 @@
 import json
-import boto3
-from botocore.exceptions import ClientError
-
 import jwt.jwt.api_jwt as apij
-
 import logging
+import sys
+import os
+
+
+# There has to be a better way than this.
+sys.path.append("./")
+sys.path.append("./requests")
+import requests
+
 
 # Note: The logging levels should come from a config/property file and not be hard coded.
 logging.basicConfig(level=logging.DEBUG)
@@ -36,27 +41,35 @@ def respond(err, res=None):
 def lambda_handler(event, context):
 
     logger.info("\nEvent = " + json.dumps(event, indent=2) + "\n")
+    secret = "secret"
 
-    test_stuff = {"msg": "Message"}
-    logger.info("Encoding " + json.dumps(test_stuff))
-    tok = apij.encode(test_stuff, key=_secret)
-    logger.info("Encoded = " + str(tok))
-    dec = apij.decode(tok, key=_secret)
-    logger.info("Decoded =  " + json.dumps(dec))
+    body = event["body"]
 
-    # Some introspection of event allows figuring out where it came from.
-    records = event.get("Records", None)
-    method = event.get("httpMethod", None)
-
-    if records is not None:
-        logger.info("I got an SNS event.")
-        logger.info("Records = " + json.dumps(records))
-    elif method is not None:
-        logger.info("I got an API GW proxy event.")
-        logger.info("\nhttpMethod = " + method + "\n")
+    if body is not None and body != {}:
+        enc = apij.encode(body, secret)
+        enc = str(enc)
     else:
-        logger.info("Not sure what I got.")
+        enc = None
 
-    response = respond(None, {"cool": "example"})
+    ip_address = event["headers"]["X-Forwarded-For"]
+    ip_address = ip_address.split(",")
+    ip_address = ip_address[0]
+
+    ip_address_key = os.environ['ip_address_key']
+
+    ip_lookup_url = "http://api.ipstack.com/" \
+        + ip_address + "?access_key=" + ip_address_key + "&format=1"
+    rsp = requests.get(ip_lookup_url)
+    if rsp.status_code == 200:
+        req_data = rsp.json()
+    else:
+        req_data = {"status_code": rsp.status_code}
+
+    rsp_body = {
+        "encoded_message": enc,
+        "ip_address_lookup_info": req_data
+    }
+
+    response = respond(None, rsp_body)
     return response
 
