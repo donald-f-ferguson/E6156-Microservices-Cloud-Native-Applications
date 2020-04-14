@@ -4,6 +4,10 @@ layout: default
 
 # E6156 - Topics in Software Engineering: Microservices and Cloud Native Applications
 
+__NOTES:__
+1. This is the fall 2019 material.
+2. I am reorganizing the repository and content to clean up the material, lectures, example, etc.
+
 ## Overview
 
 This course covers core, fundamental concepts in developing modern, cloud native application development.
@@ -106,18 +110,9 @@ define a fantasy league, assign players to teams, etc. The database is a newly d
 
 ## Lecture Material
 
-- Lecture 1: Introduction and First Microservice
-    - [HTML](Lectures/Lecture1/E6156-f2018-Lecture-1.html)
-    - [Jupyter Notebook](Lectures/Lecture1/E6156-f2018-Lecture-1.ipynb)
-- Lecture 2: PaaS, Elastic Beanstalk, Microservices
-    - [HTML](Lectures/Lecture2/E6156-f2019-Lecture-2.html)
-    - [Jupyter Notebook](Lectures/Lecture2/E6156-f2019-Lecture-2.ipynb)
-- Lecture 3: REST, Lambda Functions, etc.
-    - [HTML](Lectures/Lecture 3/E6156-f2019-Lecture-3.html)
-    - [Jupyter Notebook](Lectures/Lecture 3/E6156-f2019-Lecture-3.ipynb)
+Being cleaned up and simplified. Come back, hopefully, soon.
 
 
 ## Examples
 
-The example material for fall 2019 is in progress. 
-
+Being cleaned up and simplified. Come back, hopefully, soon.
